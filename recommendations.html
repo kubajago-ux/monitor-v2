@@ -1,0 +1,1584 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NAOKO Monitor — Rekomendacje</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f5f5f5; color:#1a1a1a; font-size:14px; }
+.topbar { background:#1a1a1a; color:#fff; padding:16px 32px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+.topbar h1 { font-size:18px; font-weight:700; }
+.topbar small { color:#999; font-size:12px; }
+.summary { background:#fff; border-bottom:1px solid #e5e5e5; padding:14px 32px; display:flex; gap:24px; flex-wrap:wrap; font-size:13px; }
+.sum-box { display:flex; flex-direction:column; gap:2px; }
+.sum-box b { font-size:22px; }
+.sum-crit { color:#dc2626; }
+.sum-warn { color:#d97706; }
+.sum-ok   { color:#059669; }
+.content { max-width:1200px; margin:0 auto; padding:24px 32px; }
+.group-header { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:#888; margin:28px 0 10px; padding-bottom:6px; border-bottom:2px solid #e5e5e5; }
+.rec-card { background:#fff; border:1px solid #e5e5e5; border-radius:8px; margin-bottom:14px; overflow:hidden; }
+.rec-card.crit { border-left:4px solid #dc2626; }
+.rec-card.high { border-left:4px solid #f97316; }
+.rec-card.med  { border-left:4px solid #eab308; }
+.rec-card.low  { border-left:4px solid #94a3b8; }
+.rec-head { padding:14px 20px; display:flex; gap:10px; align-items:flex-start; background:#fafafa; border-bottom:1px solid #f0f0f0; flex-wrap:wrap; }
+.rec-head h3 { font-size:14px; font-weight:600; flex:1; min-width:200px; }
+.rec-body { padding:14px 20px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:700px) { .rec-body { grid-template-columns:1fr; } }
+.rec-field { font-size:13px; }
+.rec-field label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#888; display:block; margin-bottom:3px; }
+.rec-field p { line-height:1.5; }
+.rec-field.full { grid-column:1/-1; }
+.rec-field .akcja-text { background:#f8f8f8; padding:10px 12px; border-radius:6px; border-left:3px solid #6366f1; font-size:13px; line-height:1.6; }
+.affected-bar { background:#f0f0f0; border-radius:4px; height:8px; margin-top:4px; overflow:hidden; }
+.affected-fill { height:100%; border-radius:4px; background:#6366f1; }
+.affected-fill.high-pct { background:#dc2626; }
+.badge-err  { background:#fee2e2; color:#991b1b; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-warn { background:#fef3c7; color:#92400e; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-info { background:#e0f2fe; color:#075985; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-global { background:#ede9fe; color:#5b21b6; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-perproduct { background:#f0fdf4; color:#166534; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+.prio-crit { background:#dc2626; color:#fff; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; }
+.prio-high { background:#f97316; color:#fff; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; }
+.prio-med  { background:#eab308; color:#fff; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; }
+.prio-low  { background:#94a3b8; color:#fff; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; }
+.handles-list { font-family:monospace; font-size:11px; color:#666; background:#f8f8f8; padding:8px 10px; border-radius:4px; line-height:1.8; max-height:100px; overflow-y:auto; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>NAOKO Monitor — Rekomendacje</h1>
+  <small>Sesja: scan_20260513_170137 &nbsp;·&nbsp; 2026-05-13 17:43 &nbsp;·&nbsp; 200 produktow &nbsp;·&nbsp; 66 rekomendacji</small>
+</div>
+<div class="summary">
+  <div class="sum-box sum-crit"><b>1</b><span>Krytyczne</span></div>
+  <div class="sum-box sum-warn"><b>23</b><span>Wysokie</span></div>
+  <div class="sum-box"><b>9</b><span>Globalne (napraw raz)</span></div>
+  <div class="sum-box"><b>57</b><span>Per produkt</span></div>
+  <div class="sum-box"><b>200</b><span>Produktow w sesji</span></div>
+</div>
+<div class="content">
+<div class="group-header">Globalne (szablon / wszyscy) (9)</div>
+<div class="rec-card crit">
+  <div class="rec-head">
+    <h3>GTM zakomentowany w szablonie</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-crit">KRYTYCZNY</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Odkomentuj {% include 'naoko-gtm-tag-head' %} w layout/theme.liquid LUB skonfiguruj GTM przez Shopify Markets → Pixels. Bez GTM: brak GA4 i zdarzen konwersji</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Tech / Marketing</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>15 min</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Krytyczny — brak pomiaru konwersji</p></div>
+    <div class="rec-field">
+      <label>Zakres (200 / 200 — 100.0%)</label>
+      <p>GLOBALNY — szablon</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:100.0%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Brak SEO title (Admin)</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij SEO title recznie w Shopify Admin → Products → [produkt] → Search engine listing → Edit</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>5 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — Shopify generuje fallback z nazwy produktu, brak keyword targetingu</p></div>
+    <div class="rec-field">
+      <label>Zakres (200 / 200 — 100.0%)</label>
+      <p>GLOBALNY — napraw raz dla wszystkich</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:100.0%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Brak SEO description (Admin)</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij meta description w Shopify Admin → Search engine listing. Max 160 zn., zawrzyj glowny keyword + USP produktu</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>5 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — wpływa na CTR w wynikach Google</p></div>
+    <div class="rec-field">
+      <label>Zakres (196 / 200 — 98.0%)</label>
+      <p>GLOBALNY — napraw raz dla wszystkich</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:98.0%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>Brak video</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Dodaj krotki film produktowy (5-15s) do galerii. Mozna uzyc istniejacych klipy z IG/Stories</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Marketing / Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>1-2h (nagranie + upload)</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — video zwieksza konwersje na PDP srednio o 15-25%</p></div>
+    <div class="rec-field">
+      <label>Zakres (198 / 200 — 99.0%)</label>
+      <p>GLOBALNY — napraw raz dla wszystkich</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:99.0%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Brak sizechart_text</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij metafield c_f.sizechart_text — lista rozmiarow tekstowo (np. 'XS S M L XL'). Uzywany do weryfikacji spojnosci wariantow</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>5 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — wewnetrzna weryfikacja</p></div>
+    <div class="rec-field">
+      <label>Zakres (197 / 200 — 98.5%)</label>
+      <p>GLOBALNY — napraw raz dla wszystkich</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:98.5%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Meta desc za dluga (320 zn.)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Skroc meta description do max 160 znakow w Shopify Admin → Search engine listing</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>3 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — Google obcina opis, traci czytelnosc</p></div>
+    <div class="rec-field">
+      <label>Zakres (196 / 200 — 98.0%)</label>
+      <p>GLOBALNY — napraw raz dla wszystkich</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:98.0%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Stale tagi: ['custom._socialmedia_parametr_rodzaj', 'custom._socialmedia_filtr_2']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Kosmetyczny</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun stare tagi kampanijne (_socialmedia_parametr_rodzaj, _socialmedia_filtr_2) — nie sa juz uzywane</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — smieci w danych</p></div>
+    <div class="rec-field">
+      <label>Zakres (170 / 200 — 85.0%)</label>
+      <p>GLOBALNY — napraw raz dla wszystkich</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:85.0%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>Puste wymagane: ['custom.02_czas_wysylki']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij wymagane metafieldy: custom.02_czas_wysylki (czas wysylki) i custom.001_material_glowny (material). Uzywane w filtrach i PDP</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>5 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — puste metafieldy = brak w filtrach kolekcji</p></div>
+    <div class="rec-field">
+      <label>Zakres (160 / 200 — 80.0%)</label>
+      <p>GLOBALNY — napraw raz dla wszystkich</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:80.0%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Duplikaty: ['16_zapiecie&lt;&gt;039_zapiecie', 'kolor&lt;&gt;023_kolor_wiodacy', '13_dlugosc&lt;&gt;017_dlugosc']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun zduplikowane metafieldy — zostaw nowy klucz, wyczysc stary (np. custom.023_kolor_wiodacy zamiast custom.kolor)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>3 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — brud w danych, moze powodowac konflikty przy automatyzacjach</p></div>
+    <div class="rec-field">
+      <label>Zakres (107 / 200 — 53.5%)</label>
+      <p>GLOBALNY — napraw raz dla wszystkich</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:53.5%"></div></div>
+    </div>
+    
+  </div>
+</div><div class="group-header">Per produkt — Metafieldy (7)</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>Konflikty: ['08_dekolt&lt;&gt;016_dekolt']</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Sprawdz i zsynchronizuj wartosci konfliktujacych metafieldow (np. 08_dekolt vs 016_dekolt). Zostaw jeden, zaktualizuj drugi</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>5 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — sprzeczne dane w filtrach</p></div>
+    <div class="rec-field">
+      <label>Zakres (83 / 200 — 41.5%)</label>
+      <p>PER PRODUKT — 83 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:41.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bubbles-sorbet, dluga-sukienka-rosa-riviera, dluga-sukienka-taliowana-marigold-kiss, dluga-sukienka-z-wiazaniem-earth-dancer, dlugi-kardigan-moherowy-lavender-blush, dlugi-kardigan-urban-picnic, kamizelka-dwustronna-bloomy-balance, kamizelka-lniana-dusty-wine, kamizelka-lniana-pink-sands, kardigan-welniany-lovely-beat, koszula-stolen-whisper, kurtka-dwustronna-pink-cheetah, kurtka-dwustronna-poppy-cloudline, kurtka-dwustronna-spring-me-up, kurtka-dwustronna-z-kapturem-poppy-double-crush ... (+63 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>Puste wymagane: ['custom.02_czas_wysylki', 'custom.001_material_glowny']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij wymagane metafieldy: custom.02_czas_wysylki (czas wysylki) i custom.001_material_glowny (material). Uzywane w filtrach i PDP</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>5 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — puste metafieldy = brak w filtrach kolekcji</p></div>
+    <div class="rec-field">
+      <label>Zakres (40 / 200 — 20.0%)</label>
+      <p>PER PRODUKT — 40 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:20.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-mon-amour, bomberka-jeansowa-careless-whisper, bomberka-jeansowa-no-rules, bomberka-pikowana-oversize-wind-of-change, dluga-sukienka-cinnamon-wave, dluga-sukienka-muslinowa-savannah, dluga-sukienka-z-wiazaniem-gypsy-dream, e-karta-podarunkowa, kamizelka-dwustronna-dream-wild, karta-podarunkowa, kimono-sunkissed-soul, kl-ia041-001-it23, kombinezon-lniany-blue-margarita, kombinezon-multiway-mulberry-dream, koszula-jeansowa-la-dolce-pausa, koszula-somewhere-sunny, koszula-z-rozcieciem-na-plecach-bluebell, koszula-z-rozcieciem-na-plecach-sweetheart, kurtka-dwustronna-z-kapturem-poppy-double-crush ... (+20 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Duplikaty: ['16_zapiecie&lt;&gt;039_zapiecie', 'kolor&lt;&gt;023_kolor_wiodacy']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun zduplikowane metafieldy — zostaw nowy klucz, wyczysc stary (np. custom.023_kolor_wiodacy zamiast custom.kolor)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>3 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — brud w danych, moze powodowac konflikty przy automatyzacjach</p></div>
+    <div class="rec-field">
+      <label>Zakres (29 / 200 — 14.5%)</label>
+      <p>PER PRODUKT — 29 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:14.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-friends, bluza-love-language, bluza-polo-mystic-plum, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dlugi-kardigan-moherowy-lavender-blush, kamizelka-lniana-dusty-wine, klasyczny-trencz-fragola, koszula-line-dancer, koszula-stolen-whisper, koszula-z-laczonych-tkanin-fresh-attitude, kurtka-jeansowa-squeezy-joy, lekka-kurtka-pikowana-pistachio-blush, marynarka-z-lnem-blue-margarita, spodnie-jeansowe-love-on-fire, sukienka-midi-na-ramiaczkach-palm-sugar ... (+9 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Duplikaty: ['kolor&lt;&gt;023_kolor_wiodacy', '13_dlugosc&lt;&gt;017_dlugosc']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun zduplikowane metafieldy — zostaw nowy klucz, wyczysc stary (np. custom.023_kolor_wiodacy zamiast custom.kolor)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>3 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — brud w danych, moze powodowac konflikty przy automatyzacjach</p></div>
+    <div class="rec-field">
+      <label>Zakres (25 / 200 — 12.5%)</label>
+      <p>PER PRODUKT — 25 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:12.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-rozpinana-coffee-break, bluza-z-kapturem-bubbles-sorbet, dluga-sukienka-z-wiazaniem-earth-dancer, longsleeve-real-world, spodnica-maxi-wave-dancer, spodnie-jeansowe-ribbon-revolution, sukienka-dwustronna-chameleon-beyond-the-lines, sukienka-infinity-maxi-rose-amour, sukienka-midi-diamond-affair, sukienka-midi-laguna-muse, sukienka-midi-shell-garden, sukienka-mini-blackbird-song, sukienka-multiway-midnight-dahlia, sweter-candy-cloud, sweter-heather-spell, szerokie-spodnie-mint-breeze, t-shirt-bonjour-la-mer, t-shirt-daisy-me-rollin, t-shirt-egg-dealer, t-shirt-how-you-doin ... (+5 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Stale tagi: ['custom._socialmedia_parametr_rodzaj']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-low">Kosmetyczny</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun stare tagi kampanijne (_socialmedia_parametr_rodzaj, _socialmedia_filtr_2) — nie sa juz uzywane</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — smieci w danych</p></div>
+    <div class="rec-field">
+      <label>Zakres (23 / 200 — 11.5%)</label>
+      <p>PER PRODUKT — 23 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:11.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-mon-amour, bluza-poddle-giggles, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-one-more-ciao, dluga-sukienka-z-wiazaniem-earth-dancer, dluga-sukienka-z-wiazaniem-gypsy-dream, dlugi-kardigan-moherowy-lavender-blush, kamizelka-dwustronna-dream-wild, kimono-sunkissed-soul, kl-ia041-001-it23, kombinezon-multiway-mulberry-dream, koszula-z-laczonych-tkanin-fresh-attitude, koszula-z-rozcieciem-na-plecach-bluebell, lniana-spodniczka-mini-moon-jane, marynarka-sweet-rebellion, sukienka-multiway-carmine-love, sweter-candy-cloud ... (+3 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Duplikaty: ['kolor&lt;&gt;023_kolor_wiodacy']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun zduplikowane metafieldy — zostaw nowy klucz, wyczysc stary (np. custom.023_kolor_wiodacy zamiast custom.kolor)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>3 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — brud w danych, moze powodowac konflikty przy automatyzacjach</p></div>
+    <div class="rec-field">
+      <label>Zakres (7 / 200 — 3.5%)</label>
+      <p>PER PRODUKT — 7 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:3.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-poddle-giggles, bluza-z-kapturem-candy-forest, czapka-duopuff-sky-latte, szalik-duopuff-juicy-matcha, t-shirt-espresso-yourself, top-bokserka-color-revolution, torebka-skorzana-typu-shopper-silky-glow</div></div>
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Stale tagi: ['custom._socialmedia_filtr_2']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-low">Kosmetyczny</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun stare tagi kampanijne (_socialmedia_parametr_rodzaj, _socialmedia_filtr_2) — nie sa juz uzywane</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — smieci w danych</p></div>
+    <div class="rec-field">
+      <label>Zakres (3 / 200 — 1.5%)</label>
+      <p>PER PRODUKT — 3 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:1.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">karta-podarunkowa, spodnie-jeansowe-ribbon-revolution, sukienka-dzianinowa-mismatched</div></div>
+  </div>
+</div><div class="group-header">Per produkt — Zdjecia (29)</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>10/10 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (22 / 200 — 11.0%)</label>
+      <p>PER PRODUKT — 22 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:11.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-tutto-bene, kamizelka-dwustronna-dream-wild, kamizelka-lniana-pink-sands, kl-ia041-001-it23, koszula-line-dancer, kurtka-jeansowa-deep-mood, lniana-sukienka-midi-retro-sun, plaszcz-teddy-berry-bloom, sa-l189-001-it25, spodnica-maxi-wave-dancer, spodnica-midi-heartbreaker, spodniczka-wiazana-catalina, spodnie-crochet-whispering-dunes, sukienka-midi-diamond-affair, sukienka-midi-na-ramiaczkach-palm-sugar, sukienka-na-ramiaczkach-primrose, sweter-candy-cloud, szerokie-spodnie-bubblegum-attitude, szorty-crochet-lavender-pearl ... (+2 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>14/14 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (19 / 200 — 9.5%)</label>
+      <p>PER PRODUKT — 19 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:9.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-rozpinana-coffee-break, bluza-z-kapturem-fall-in-love, czapka-duopuff-sky-latte, dluga-spodnica-sunny-candy, kamizelka-dwustronna-teddy-dunes, kardigan-little-star, kombinezon-multiway-mulberry-dream, lekka-kurtka-pikowana-indigo-charm, marynarka-lniana-ocean-air, plaszcz-z-laczonych-tkanin-harmony, spodnica-flanelowa-sunday-crush, sukienka-midi-florence-kissed, sukienka-midi-lunablue, sukienka-midi-shell-garden, szerokie-spodnie-korcula, szorty-lniane-berry-drop, szorty-rosy-lines, t-shirt-daisy-me-rollin, top-infinity-mint-breeze</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>12/12 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (19 / 200 — 9.5%)</label>
+      <p>PER PRODUKT — 19 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:9.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-z-kapturem-bubbles-sorbet, bluza-z-kapturem-candy-forest, dluga-sukienka-rosa-riviera, dluga-sukienka-taliowana-marigold-kiss, dluga-sukienka-z-wiazaniem-gypsy-dream, kamizelka-lniana-dusty-wine, koszula-stolen-whisper, koszula-z-rozcieciem-na-plecach-sweetheart, kurtka-pikowana-pastel-harmony, kurtka-pikowana-wild-at-heart, plaszcz-z-ekoskory-deep-future, spodnica-midi-z-rozcieciem-aperitivo, sukienka-dwustronna-chameleon-giulia, sukienka-dwustronna-chameleon-luna, sukienka-midi-golden-meadow, sukienka-midi-salt-kissed, sweter-z-krotkim-rekawem-candy-crush, sweter-z-krotkim-rekawem-heartbeat, torebka-skorzana-typu-shopper-violette</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>11/11 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (17 / 200 — 8.5%)</label>
+      <p>PER PRODUKT — 17 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:8.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-friends, bluza-rozpinana-starfish, dluga-sukienka-z-wiazaniem-earth-dancer, klasyczny-trencz-fragola, koszula-z-laczonych-tkanin-fresh-attitude, kurtka-ramoneska-urban-sunrise, lniana-spodniczka-mini-moon-jane, spodnie-jeansowe-ribbon-revolution, sukienka-maxi-z-odkrytymi-plecami-dakota, sukienka-midi-dwustronna-rosabella, sukienka-midi-pure-romance, sukienka-mini-dakota-flower, sukienka-mini-my-love-side, sukienka-na-ramiaczkach-florentine, szorty-desert-lily, t-shirt-espresso-yourself, top-bokserka-color-revolution</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>15/15 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (13 / 200 — 6.5%)</label>
+      <p>PER PRODUKT — 13 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:6.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bomberka-jeansowa-no-rules, kurtka-dwustronna-z-kapturem-poppy-double-crush, kurtka-mellow-mood, marynarka-dancing-shadows, marynarka-z-lnem-blue-margarita, sukienka-dzianinowa-mismatched, sukienka-mini-daisy-chic, sukienka-multiway-candy-coastline, sukienka-multiway-carmine-love, sukienka-na-jedno-ramie-saltbeam, szerokie-spodnie-mint-breeze, trencz-krotki-sunlit-breeze, welniany-sweter-z-golfem-rose-whisper</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>16/16 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (12 / 200 — 6.0%)</label>
+      <p>PER PRODUKT — 12 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:6.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-z-kapturem-one-more-ciao, bomberka-pikowana-oversize-wind-of-change, dluga-sukienka-cinnamon-wave, krotki-trencz-coffee-break, kurtka-notes-to-happiness, lekka-kurtka-pikowana-blossom-charm, mulberry-charm, spodnie-jeansowe-strawberry-bubblegum, sukienka-midi-velvet-wind, szerokie-spodnie-lniane-dusty-wine, t-shirt-my-best-life, welniany-sweter-z-golfem-shine-bright</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>9/9 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (11 / 200 — 5.5%)</label>
+      <p>PER PRODUKT — 11 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:5.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">dluga-sukienka-muslinowa-savannah, koszula-z-rozcieciem-na-plecach-bluebell, kurtka-pikowana-my-ember, marynarka-sweet-rebellion, spodnie-dancing-shadows, sukienka-dzianinowa-polo-blossom-haze, sukienka-maxi-na-ramiaczkach-day-whisper, sukienka-na-jedno-ramie-geranio, t-shirt-bonjour-la-mer, top-z-falbanka-ruggine, torebka-skorzana-typu-shopper-silky-glow</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>13/13 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (10 / 200 — 5.0%)</label>
+      <p>PER PRODUKT — 10 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:5.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-mon-amour, bluza-poddle-giggles, bluza-polo-mystic-plum, kardigan-welniany-lovely-beat, kurtka-jeansowa-her-rules, kurtka-zimowa-misty-woods, lekka-kurtka-pikowana-pistachio-blush, lniana-sukienka-bay-breeze, sweter-heather-spell, trencz-krotki-classic-bloom</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>17/17 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (10 / 200 — 5.0%)</label>
+      <p>PER PRODUKT — 10 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:5.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">dlugi-kardigan-urban-picnic, kurtka-cinnamon-hug, kurtka-dwustronna-z-kapturem-poppy-mystic-garden, parka-dwustronna-pixel-love, sukienka-maxi-na-ramiaczkach-chocolate-mocha, sukienka-na-jedno-ramie-seabreeze, sukienka-na-ramiaczkach-painted-memories, sukienka-na-ramiaczkach-tuscan-romance, szerokie-spodnie-z-lnem-blue-margarita, t-shirt-how-you-doin</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>19/19 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (8 / 200 — 4.0%)</label>
+      <p>PER PRODUKT — 8 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:4.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">koszula-jeansowa-la-dolce-pausa, lekka-kurtka-pikowana-rosalia, marynarka-desert-lily, spodnie-bright-side, sukienka-dwustronna-mini-chameleon-cherrify, sukienka-mini-dolce-fiore, sweter-z-krotkim-rekawem-sunshine, welniany-sweter-soft-amore</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>18/18 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (8 / 200 — 4.0%)</label>
+      <p>PER PRODUKT — 8 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:4.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">kurtka-candy-glow, plaszcz-z-odpinanymi-rekawami-street-beat, sukienka-dwustronna-chameleon-beyond-the-lines, sukienka-midi-laguna-muse, sukienka-mini-girly-charm, sweter-funky-fungi, szorty-lniane-pink-sands, trencz-secret-shelter</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>21/21 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (7 / 200 — 3.5%)</label>
+      <p>PER PRODUKT — 7 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:3.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-rozpinana-love-letter, bluza-z-kapturem-bonjour-cherie, bomberka-jeansowa-careless-whisper, kamizelka-dwustronna-bloomy-balance, kurtka-dwustronna-pink-cheetah, kurtka-jeansowa-squeezy-joy, welniany-sweter-frozen-rainbow</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>7/7 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (7 / 200 — 3.5%)</label>
+      <p>PER PRODUKT — 7 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:3.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">kombinezon-lniany-blue-margarita, spodnie-jeansowe-love-on-fire, spodnie-lazy-mornings, sukienka-mini-blackbird-song, sukienka-mini-secret-garden, szalik-duopuff-juicy-matcha, szerokie-spodnie-garden-spark</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>20/20 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (6 / 200 — 3.0%)</label>
+      <p>PER PRODUKT — 6 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:3.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">koszula-somewhere-sunny, kurtka-dwustronna-poppy-dot-it-up, spodnica-midi-candy-love, sukienka-infinity-maxi-rose-amour, sweter-z-welna-retro-glam, sweter-z-welna-sweet-berry</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>35/35 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (5 / 200 — 2.5%)</label>
+      <p>PER PRODUKT — 5 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:2.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-love-language, kurtka-dwustronna-poppy-cloudline, kurtka-dwustronna-poppy-cozy-walk, marynarka-lost-in-notes, trencz-city-nomad</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>8/8 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (5 / 200 — 2.5%)</label>
+      <p>PER PRODUKT — 5 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:2.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">kimono-sunkissed-soul, marynarka-more-amore, spodniczka-mini-orchid-affair, sukienka-mini-good-energy, szerokie-spodnie-lniane-boho-muse</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>6/6 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (4 / 200 — 2.0%)</label>
+      <p>PER PRODUKT — 4 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:2.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">lniana-sukienka-coral-retreat, longsleeve-real-world, spodnie-cherished-moments, spodnie-painted-memories</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>27/27 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (3 / 200 — 1.5%)</label>
+      <p>PER PRODUKT — 3 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:1.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">kurtka-dwustronna-poppy-bambi-mood, sukienka-multiway-midnight-dahlia, szerokie-spodnie-twilight-haze</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>22/22 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (2 / 200 — 1.0%)</label>
+      <p>PER PRODUKT — 2 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:1.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">dlugi-kardigan-moherowy-lavender-blush, sukienka-multiway-dream-island</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>26/26 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (2 / 200 — 1.0%)</label>
+      <p>PER PRODUKT — 2 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:1.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">klasyczny-trencz-midnight-roar, parka-dwustronna-moon-dots</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>23/23 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (2 / 200 — 1.0%)</label>
+      <p>PER PRODUKT — 2 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:1.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">kurtka-dwustronna-poppy-choco-mousse, plaszcz-z-odpinanymi-rekawami-warm-intentions</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>30/30 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">dluga-kamizelka-dwustronna-grove-walk</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>2/2 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">e-karta-podarunkowa</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>3/3 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">karta-podarunkowa</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>25/25 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">kurtka-dwustronna-spring-me-up</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>29/29 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">parka-dwustronna-stay-wildish</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>4/4 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">spodniczka-mini-ruggine</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>5/5 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">spodnie-cloud-harmony</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>32/32 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">sweter-z-welna-strawberry-cream</div></div>
+  </div>
+</div><div class="group-header">Per produkt — Rozmiary (1)</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Brak sizechart_text i tabela_rozmiar_html</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Dodaj oba metafieldy w Shopify Admin: custom.sizechart_text (tekst dla search) + custom.tabela_rozmiar_html (tabela widoczna na PDP)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>15 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — brak tabeli rozmiarow = wyzsza liczba zwrotow</p></div>
+    <div class="rec-field">
+      <label>Zakres (3 / 200 — 1.5%)</label>
+      <p>PER PRODUKT — 3 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:1.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">e-karta-podarunkowa, karta-podarunkowa, szalik-duopuff-juicy-matcha</div></div>
+  </div>
+</div><div class="group-header">Per produkt — Cena (13)</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie S</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (66 / 200 — 33.0%)</label>
+      <p>PER PRODUKT — 66 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:33.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+46 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie M</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (66 / 200 — 33.0%)</label>
+      <p>PER PRODUKT — 66 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:33.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+46 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie L</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (66 / 200 — 33.0%)</label>
+      <p>PER PRODUKT — 66 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:33.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+46 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie XS</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (65 / 200 — 32.5%)</label>
+      <p>PER PRODUKT — 65 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:32.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+45 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie XL</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (65 / 200 — 32.5%)</label>
+      <p>PER PRODUKT — 65 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:32.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+45 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie S/M</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (47 / 200 — 23.5%)</label>
+      <p>PER PRODUKT — 47 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:23.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bomberka-jeansowa-careless-whisper, bomberka-jeansowa-no-rules, bomberka-pikowana-oversize-wind-of-change, dluga-sukienka-cinnamon-wave, dluga-sukienka-muslinowa-savannah, dluga-sukienka-rosa-riviera, dluga-sukienka-z-wiazaniem-earth-dancer, dluga-sukienka-z-wiazaniem-gypsy-dream, kamizelka-lniana-dusty-wine, kamizelka-lniana-pink-sands, kardigan-little-star, kimono-sunkissed-soul, kl-ia041-001-it23, kombinezon-multiway-mulberry-dream, koszula-jeansowa-la-dolce-pausa, koszula-somewhere-sunny, koszula-z-laczonych-tkanin-fresh-attitude, koszula-z-rozcieciem-na-plecach-bluebell, koszula-z-rozcieciem-na-plecach-sweetheart, kurtka-jeansowa-her-rules ... (+27 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie L/XL</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (46 / 200 — 23.0%)</label>
+      <p>PER PRODUKT — 46 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:23.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bomberka-jeansowa-careless-whisper, bomberka-jeansowa-no-rules, bomberka-pikowana-oversize-wind-of-change, dluga-sukienka-cinnamon-wave, dluga-sukienka-muslinowa-savannah, dluga-sukienka-rosa-riviera, dluga-sukienka-z-wiazaniem-earth-dancer, dluga-sukienka-z-wiazaniem-gypsy-dream, kamizelka-lniana-dusty-wine, kamizelka-lniana-pink-sands, kardigan-little-star, kimono-sunkissed-soul, kl-ia041-001-it23, kombinezon-multiway-mulberry-dream, koszula-jeansowa-la-dolce-pausa, koszula-somewhere-sunny, koszula-z-laczonych-tkanin-fresh-attitude, koszula-z-rozcieciem-na-plecach-bluebell, koszula-z-rozcieciem-na-plecach-sweetheart, kurtka-jeansowa-her-rules ... (+26 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie XS/S</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (42 / 200 — 21.0%)</label>
+      <p>PER PRODUKT — 42 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:21.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bomberka-jeansowa-careless-whisper, bomberka-jeansowa-no-rules, bomberka-pikowana-oversize-wind-of-change, dluga-sukienka-cinnamon-wave, dluga-sukienka-muslinowa-savannah, dluga-sukienka-rosa-riviera, dluga-sukienka-z-wiazaniem-earth-dancer, dluga-sukienka-z-wiazaniem-gypsy-dream, kamizelka-lniana-dusty-wine, kamizelka-lniana-pink-sands, kardigan-little-star, kimono-sunkissed-soul, kombinezon-multiway-mulberry-dream, koszula-jeansowa-la-dolce-pausa, koszula-somewhere-sunny, koszula-z-laczonych-tkanin-fresh-attitude, koszula-z-rozcieciem-na-plecach-bluebell, koszula-z-rozcieciem-na-plecach-sweetheart, kurtka-jeansowa-her-rules, kurtka-jeansowa-squeezy-joy ... (+22 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie M/L</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (25 / 200 — 12.5%)</label>
+      <p>PER PRODUKT — 25 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:12.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bomberka-pikowana-oversize-wind-of-change, dluga-sukienka-cinnamon-wave, dluga-sukienka-muslinowa-savannah, dluga-sukienka-z-wiazaniem-earth-dancer, dluga-sukienka-z-wiazaniem-gypsy-dream, kl-ia041-001-it23, kombinezon-multiway-mulberry-dream, koszula-z-laczonych-tkanin-fresh-attitude, koszula-z-rozcieciem-na-plecach-bluebell, koszula-z-rozcieciem-na-plecach-sweetheart, lniana-sukienka-bay-breeze, longsleeve-real-world, sukienka-dzianinowa-polo-blossom-haze, sukienka-maxi-na-ramiaczkach-chocolate-mocha, sukienka-midi-pure-romance, sukienka-multiway-candy-coastline, sukienka-multiway-carmine-love, sukienka-multiway-midnight-dahlia, sukienka-na-jedno-ramie-seabreeze, szerokie-spodnie-korcula ... (+5 wiecej)</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie ONE SIZE</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (6 / 200 — 3.0%)</label>
+      <p>PER PRODUKT — 6 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:3.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">dlugi-kardigan-moherowy-lavender-blush, sweter-candy-cloud, sweter-z-krotkim-rekawem-candy-crush, sweter-z-krotkim-rekawem-sunshine, torebka-skorzana-typu-shopper-silky-glow, torebka-skorzana-typu-shopper-violette</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie XL/XXL</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (3 / 200 — 1.5%)</label>
+      <p>PER PRODUKT — 3 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:1.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">dluga-sukienka-muslinowa-savannah, dluga-sukienka-z-wiazaniem-earth-dancer, dluga-sukienka-z-wiazaniem-gypsy-dream</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie XXL</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (2 / 200 — 1.0%)</label>
+      <p>PER PRODUKT — 2 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:1.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-one-more-ciao</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie XXS/XS</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations / Ecommerce</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">t-shirt-my-best-life</div></div>
+  </div>
+</div><div class="group-header">Per produkt — Opis (7)</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Opis za krotki (512 zn., min 600)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Rozwin opis produktu do min 600 znakow. Dodaj: fabric story, jak nosic, z czym laczyc, moment sezonu</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>20-30 min / produkt (lub product-copy agent)</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — krotki opis = nizszy score SEO + slabsza konwersja</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bomberka-jeansowa-careless-whisper</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Opis za krotki (568 zn., min 600)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Rozwin opis produktu do min 600 znakow. Dodaj: fabric story, jak nosic, z czym laczyc, moment sezonu</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>20-30 min / produkt (lub product-copy agent)</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — krotki opis = nizszy score SEO + slabsza konwersja</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bomberka-jeansowa-no-rules</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Opis za krotki (433 zn., min 600)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Rozwin opis produktu do min 600 znakow. Dodaj: fabric story, jak nosic, z czym laczyc, moment sezonu</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>20-30 min / produkt (lub product-copy agent)</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — krotki opis = nizszy score SEO + slabsza konwersja</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">czapka-duopuff-sky-latte</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Opis za krotki (560 zn., min 600)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Rozwin opis produktu do min 600 znakow. Dodaj: fabric story, jak nosic, z czym laczyc, moment sezonu</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>20-30 min / produkt (lub product-copy agent)</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — krotki opis = nizszy score SEO + slabsza konwersja</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">kurtka-zimowa-misty-woods</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Opis za krotki (536 zn., min 600)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Rozwin opis produktu do min 600 znakow. Dodaj: fabric story, jak nosic, z czym laczyc, moment sezonu</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>20-30 min / produkt (lub product-copy agent)</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — krotki opis = nizszy score SEO + slabsza konwersja</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">plaszcz-z-ekoskory-deep-future</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Opis za krotki (581 zn., min 600)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Rozwin opis produktu do min 600 znakow. Dodaj: fabric story, jak nosic, z czym laczyc, moment sezonu</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>20-30 min / produkt (lub product-copy agent)</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — krotki opis = nizszy score SEO + slabsza konwersja</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">spodniczka-wiazana-catalina</div></div>
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Opis za krotki (546 zn., min 600)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Rozwin opis produktu do min 600 znakow. Dodaj: fabric story, jak nosic, z czym laczyc, moment sezonu</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>20-30 min / produkt (lub product-copy agent)</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — krotki opis = nizszy score SEO + slabsza konwersja</p></div>
+    <div class="rec-field">
+      <label>Zakres (1 / 200 — 0.5%)</label>
+      <p>PER PRODUKT — 1 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">szalik-duopuff-juicy-matcha</div></div>
+  </div>
+</div>
+</div>
+</body>
+</html>

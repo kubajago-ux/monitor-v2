@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rekomendacje — Spódnica maxi Wave Dancer</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f5f5f5; color:#1a1a1a; font-size:14px; }
+.topbar { background:#1a1a1a; color:#fff; padding:14px 32px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+.topbar h1 { font-size:17px; font-weight:700; }
+.topbar small { color:#999; font-size:12px; }
+.back-bar { background:#fff; border-bottom:1px solid #e5e5e5; padding:10px 32px; display:flex; gap:16px; align-items:center; }
+.back-bar a { color:#6366f1; text-decoration:none; font-size:13px; font-weight:600; }
+.back-bar a:hover { text-decoration:underline; }
+.back-bar .sep { color:#ddd; }
+.prod-info { background:#fff; border-bottom:1px solid #e5e5e5; padding:14px 32px; }
+.prod-info h2 { font-size:17px; margin-bottom:4px; }
+.prod-info .prod-url { font-family:monospace; font-size:12px; color:#6366f1; }
+.sum-bar { background:#fff; border-bottom:1px solid #e5e5e5; padding:12px 32px; display:flex; gap:24px; flex-wrap:wrap; }
+.sum-box { display:flex; flex-direction:column; gap:1px; }
+.sum-box b { font-size:20px; font-weight:700; }
+.sum-box span { font-size:11px; color:#888; }
+.c-crit { color:#dc2626; } .c-high { color:#f97316; } .c-glob { color:#7c3aed; } .c-prod { color:#059669; }
+.content { max-width:960px; margin:0 auto; padding:24px 32px; }
+.group-header { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.8px;
+                 color:#888; margin:24px 0 10px; padding-bottom:5px; border-bottom:2px solid #e5e5e5; }
+
+
+.reco-section { margin-top:32px; padding-top:24px; border-top:2px solid #e5e5e5; }
+.reco-section h2 { font-size:15px; font-weight:700; margin-bottom:16px; color:#1a1a1a; }
+.reco-section .reco-subtitle { font-size:12px; color:#888; margin-bottom:20px; }
+.rec-card { background:#fff; border:1px solid #e5e5e5; border-radius:8px; margin-bottom:12px; overflow:hidden; }
+.rec-card.crit { border-left:4px solid #dc2626; }
+.rec-card.high { border-left:4px solid #f97316; }
+.rec-card.med  { border-left:4px solid #eab308; }
+.rec-card.low  { border-left:4px solid #94a3b8; }
+.rec-head { padding:12px 18px; display:flex; gap:8px; align-items:flex-start; background:#fafafa; border-bottom:1px solid #f0f0f0; flex-wrap:wrap; }
+.rec-head h3 { font-size:13px; font-weight:600; flex:1; min-width:180px; }
+.rec-body { padding:12px 18px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:700px) { .rec-body { grid-template-columns:1fr; } }
+.rec-field { font-size:13px; }
+.rec-field label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#888; display:block; margin-bottom:2px; }
+.rec-field p { line-height:1.5; }
+.rec-field.full { grid-column:1/-1; }
+.rec-field .akcja-text { background:#f8f8f8; padding:9px 11px; border-radius:6px; border-left:3px solid #6366f1; font-size:13px; line-height:1.6; }
+.badge-err  { background:#fee2e2; color:#991b1b; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-warn { background:#fef3c7; color:#92400e; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-global     { background:#ede9fe; color:#5b21b6; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-perproduct { background:#f0fdf4; color:#166534; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.prio-crit { background:#dc2626; color:#fff; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:700; }
+.prio-high { background:#f97316; color:#fff; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:700; }
+.prio-med  { background:#eab308; color:#fff; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:700; }
+.prio-low  { background:#94a3b8; color:#fff; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:700; }
+
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>NAOKO Monitor — Rekomendacje</h1>
+  <small>Sesja: scan_20260513_170137 &nbsp;·&nbsp; 2026-05-13 17:43</small>
+</div>
+<div class="back-bar">
+  <a href="index.html">&larr; Dashboard</a>
+  <span class="sep">|</span>
+  <a href="spodnica-maxi-wave-dancer.html">Pelna analiza produktu</a>
+</div>
+<div class="prod-info">
+  <h2>Spódnica maxi Wave Dancer</h2>
+  <a class="prod-url" href="https://naokodev.myshopify.com/products/spodnica-maxi-wave-dancer" target="_blank">https://naokodev.myshopify.com/products/spodnica-maxi-wave-dancer</a>
+</div>
+<div class="sum-bar">
+  <div class="sum-box c-crit"><b>1</b><span>Krytyczne</span></div>
+  <div class="sum-box c-high"><b>2</b><span>Wysokie</span></div>
+  <div class="sum-box c-glob"><b>9</b><span>Globalne</span></div>
+  <div class="sum-box c-prod"><b>2</b><span>Per produkt</span></div>
+  <div class="sum-box"><b>11</b><span>Lacznie</span></div>
+</div>
+<div class="content">
+<div class="group-header">Globalne (dotycza calego sklepu) (9)</div><div class="rec-card crit">
+  <div class="rec-head">
+    <h3>GTM zakomentowany w szablonie</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-crit">KRYTYCZNY</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Odkomentuj {% include 'naoko-gtm-tag-head' %} w layout/theme.liquid LUB skonfiguruj GTM przez Shopify Markets → Pixels. Bez GTM: brak GA4 i zdarzen konwersji</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Tech / Marketing</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>15 min</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Krytyczny — brak pomiaru konwersji</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card high">
+  <div class="rec-head">
+    <h3>Brak SEO title (Admin)</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij SEO title recznie w Shopify Admin → Products → [produkt] → Search engine listing → Edit</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Content / SEO</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>5 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Wysoki — Shopify generuje fallback z nazwy produktu, brak keyword targetingu</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card high">
+  <div class="rec-head">
+    <h3>Brak SEO description (Admin)</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij meta description w Shopify Admin → Search engine listing. Max 160 zn., zawrzyj glowny keyword + USP produktu</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Content / SEO</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>5 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Sredni — wpływa na CTR w wynikach Google</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card med">
+  <div class="rec-head">
+    <h3>Brak video</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Dodaj krotki film produktowy (5-15s) do galerii. Mozna uzyc istniejacych klipy z IG/Stories</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Marketing / Content</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>1-2h (nagranie + upload)</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Wysoki — video zwieksza konwersje na PDP srednio o 15-25%</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card low">
+  <div class="rec-head">
+    <h3>Brak sizechart_text</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij metafield c_f.sizechart_text — lista rozmiarow tekstowo (np. 'XS S M L XL'). Uzywany do weryfikacji spojnosci wariantow</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>5 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — wewnetrzna weryfikacja</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card low">
+  <div class="rec-head">
+    <h3>Meta desc za dluga (320 zn.)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Skroc meta description do max 160 znakow w Shopify Admin → Search engine listing</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Content / SEO</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>3 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — Google obcina opis, traci czytelnosc</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card low">
+  <div class="rec-head">
+    <h3>Stale tagi: ['custom._socialmedia_parametr_rodzaj', 'custom._socialmedia_filtr_2']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Kosmetyczny</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun stare tagi kampanijne (_socialmedia_parametr_rodzaj, _socialmedia_filtr_2) — nie sa juz uzywane</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>2 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — smieci w danych</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card med">
+  <div class="rec-head">
+    <h3>Puste wymagane: ['custom.02_czas_wysylki']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij wymagane metafieldy: custom.02_czas_wysylki (czas wysylki) i custom.001_material_glowny (material). Uzywane w filtrach i PDP</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations / Content</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>5 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Sredni — puste metafieldy = brak w filtrach kolekcji</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card low">
+  <div class="rec-head">
+    <h3>Duplikaty: ['16_zapiecie&lt;&gt;039_zapiecie', 'kolor&lt;&gt;023_kolor_wiodacy', '13_dlugosc&lt;&gt;017_dlugosc']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun zduplikowane metafieldy — zostaw nowy klucz, wyczysc stary (np. custom.023_kolor_wiodacy zamiast custom.kolor)</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>3 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — brud w danych, moze powodowac konflikty przy automatyzacjach</p>
+    </div>
+    
+  </div>
+</div><div class="group-header">Specyficzne dla tego produktu (2)</div><div class="rec-card med">
+  <div class="rec-head">
+    <h3>10/10 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Content / SEO</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>10 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card low">
+  <div class="rec-head">
+    <h3>Duplikaty: ['kolor&lt;&gt;023_kolor_wiodacy', '13_dlugosc&lt;&gt;017_dlugosc']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun zduplikowane metafieldy — zostaw nowy klucz, wyczysc stary (np. custom.023_kolor_wiodacy zamiast custom.kolor)</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>3 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — brud w danych, moze powodowac konflikty przy automatyzacjach</p>
+    </div>
+    
+  </div>
+</div>
+</div>
+</body>
+</html>

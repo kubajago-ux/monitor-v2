@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kurtka jeansowa Squeezy Joy — NAOKO Monitor</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f5f5f5; color:#1a1a1a; font-size:14px; }
+.topbar { background:#1a1a1a; color:#fff; padding:14px 32px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.topbar h1 { font-size:17px; font-weight:700; }
+.topbar small { color:#999; font-size:12px; }
+.sum-bar { background:#fff; border-bottom:1px solid #e5e5e5; padding:12px 32px; display:flex; gap:28px; flex-wrap:wrap; }
+.sum-box { display:flex; flex-direction:column; gap:1px; }
+.sum-box b { font-size:22px; font-weight:700; }
+.sum-box span { font-size:11px; color:#888; }
+.c-err  { color:#dc2626; }
+.c-warn { color:#d97706; }
+.c-ok   { color:#059669; }
+.ok   { color:#059669; font-weight:600; }
+.err  { color:#dc2626; font-weight:600; }
+.warn { color:#d97706; font-weight:600; }
+.badge-active { background:#d1fae5; color:#065f46; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-err    { background:#fee2e2; color:#991b1b; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-warn   { background:#fef3c7; color:#92400e; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.score-good { background:#d1fae5; color:#065f46; }
+.score-warn { background:#fef3c7; color:#92400e; }
+.score-bad  { background:#fee2e2; color:#991b1b; }
+
+.back-bar { background:#fff; border-bottom:1px solid #e5e5e5; padding:10px 32px; }
+.back-bar a { color:#6366f1; text-decoration:none; font-size:13px; font-weight:600; }
+.back-bar a:hover { text-decoration:underline; }
+.content { max-width:1200px; margin:0 auto; padding:24px 32px; }
+.card { background:#fff; border-radius:8px; border:1px solid #e5e5e5; overflow:hidden; }
+.card-header { padding:20px 24px; border-bottom:1px solid #f0f0f0; background:#fafafa; }
+.card-title-row { display:flex; gap:12px; align-items:center; margin-bottom:6px; flex-wrap:wrap; }
+.card-title-row h2 { font-size:20px; }
+.badges { display:flex; gap:6px; flex-wrap:wrap; }
+.url-link { font-family:monospace; font-size:12px; color:#6366f1; background:#f0f0ff;
+            padding:2px 8px; border-radius:4px; text-decoration:none; display:inline-block;
+            margin-bottom:8px; word-break:break-all; }
+.url-link:hover { text-decoration:underline; }
+.meta-row { font-size:13px; color:#666; margin-bottom:12px; }
+.scores-row { display:flex; gap:8px; flex-wrap:wrap; }
+.score-box { text-align:center; padding:7px 14px; border-radius:6px; font-size:11px;
+             font-weight:600; line-height:1.4; min-width:70px; }
+.score-box big { font-size:20px; display:block; }
+.sections { padding:0 24px 24px; }
+.section { margin-top:22px; }
+.section h3 { font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase;
+              color:#555; margin-bottom:8px; padding-bottom:5px; border-bottom:1px solid #f0f0f0; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { text-align:left; padding:8px 10px; background:#f8f8f8; border-bottom:1px solid #e5e5e5;
+     font-weight:600; color:#444; font-size:11px; }
+td { padding:7px 10px; border-bottom:1px solid #f5f5f5; vertical-align:top; }
+td.val { max-width:320px; word-break:break-word; font-family:monospace; font-size:12px; }
+tr:last-child td { border-bottom:none; }
+.row-warn td { background:#fffbeb; }
+.row-err  td { background:#fff5f5; }
+.row-int  td { color:#aaa; font-size:12px; }
+.sc-row { font-weight:700; text-align:center; }
+.sc-row.score-good { color:#059669; }
+.sc-row.score-warn { color:#d97706; }
+.sc-row.score-bad  { color:#dc2626; }
+.note { margin-top:8px; padding:8px 12px; border-radius:4px; font-size:12px;
+        background:#f8f8f8; color:#555; }
+.warn-note { background:#fffbeb; color:#92400e; }
+.err-note  { background:#fff5f5; color:#991b1b; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>NAOKO Monitor</h1>
+  <small>scan_20260513_170137 &nbsp;·&nbsp; 2026-05-13 17:12</small>
+</div>
+<div class="back-bar"><a href="index.html">&larr; Wróc do dashboardu</a></div>
+<div class="content">
+<div class="card">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h2>Kurtka jeansowa Squeezy Joy</h2>
+      <div class="badges">
+        <span class="badge-active">ACTIVE</span>
+        <span class="badge-err">3 error</span>
+        <span class="badge-warn">9 warn</span>
+      </div>
+    </div>
+    <a class="url-link" href="https://naokodev.myshopify.com/products/kurtka-jeansowa-squeezy-joy" target="_blank">https://naokodev.myshopify.com/products/kurtka-jeansowa-squeezy-joy</a>
+    <div class="meta-row"><strong>529.0 PLN</strong> &nbsp;·&nbsp; NAOKO-STORE.pl</div>
+    <div class="scores-row">
+      <div class="score-box score-bad">SEO<br><big>2/10</big></div>
+      <div class="score-box score-good">Opis<br><big>10/10</big></div>
+      <div class="score-box score-bad">Zdjecia<br><big>4/10</big></div>
+      <div class="score-box score-warn">Rozmiary<br><big>7/10</big></div>
+      <div class="score-box score-bad">Metafieldy<br><big>5/10</big></div>
+      <div class="score-box score-good">Naglowki<br><big>10/10</big></div>
+      <div class="score-box score-warn">TOTAL<br><big>6.3/10</big></div>
+    </div>
+  </div>
+  <div class="sections">
+
+    <div class="section">
+      <h3>SEO META</h3>
+      <table>
+        <tr><th>Pole</th><th>Wartosc</th><th>Status</th></tr>
+        <tr><td>SEO Title (Admin)</td>
+            <td><em>null — nie ustawiony</em></td>
+            <td><span class="err">BRAK</span></td></tr>
+        <tr><td>SEO Description (Admin)</td>
+            <td><em>null — nie ustawiony</em></td>
+            <td><span class="err">BRAK</span></td></tr>
+        <tr><td>&lt;title&gt; (renderowany)</td>
+            <td>Kurtka jeansowa Squeezy Joy
+
+        – NAOKO-STORE.pl</td>
+            <td><span class="warn">fallback Shopify</span></td></tr>
+        <tr><td>&lt;meta description&gt; (renderowany)</td>
+            <td>Kurtka jeansowa Squeezy Joy to model, który w pełni oddaje radość życia i kolorowy duch #naokogirls.</td>
+            <td><span class="warn">fallback z opisu</span></td></tr>
+        <tr><td>og:image</td>
+            <td><code>NAOKO_20250613356064.jpg</code></td>
+            <td><span class="ok">OK</span></td></tr>
+        <tr><td>og:image:alt</td>
+            <td>brak</td>
+            <td><span class="err">BRAK</span></td></tr>
+      </table>
+      <p class="note warn-note">Shopify generuje title i meta description automatycznie — brak recznie zoptymalizowanego SEO.</p>
+    </div>
+
+    <div class="section">
+      <h3>NAGLOWKI H1 / H2</h3>
+      <table><tr><th>Tag</th><th>Tresc</th><th>Ocena</th></tr><tr><td><b>H2</b></td><td>Język</td><td><span class="ok">content</span></td></tr><tr><td><b>H1</b></td><td>Kurtka jeansowa Squeezy Joy</td><td><span class="ok">OK</span></td></tr><tr><td><b>H2</b></td><td>Kurtka z przesłaniem – pełna koloru i luzu</td><td><span class="ok">content</span></td></tr><tr><td><b>H2</b></td><td>Produkty</td><td><span class="warn">UI/footer</span></td></tr><tr><td><b>H2</b></td><td>Sklep</td><td><span class="warn">UI/footer</span></td></tr><tr><td><b>H2</b></td><td>Newsletter</td><td><span class="warn">UI/footer</span></td></tr><tr><td><b>H2</b></td><td>Zakup wygląd</td><td><span class="ok">content</span></td></tr><tr><td><b>H2</b></td><td>Wybierz opcje</td><td><span class="warn">UI/footer</span></td></tr></table>
+      <p class="note">H1: 1x &nbsp;|&nbsp; H2 content: 3/7</p>
+    </div>
+
+    <div class="section">
+      <h3>ROZMIARY — SPOJNOSC</h3>
+      <table><tr><th>Wariant</th><th>sizechart_text</th><th>tabela_rozmiar_html</th><th>Stock</th></tr>
+      <tr><td>XS/S</td><td><span class="warn">brak pola</span></td><td><span class="ok">TAK</span></td><td>2</td></tr><tr><td>S/M</td><td><span class="warn">brak pola</span></td><td><span class="ok">TAK</span></td><td>0</td></tr><tr><td>L/XL</td><td><span class="warn">brak pola</span></td><td><span class="ok">TAK</span></td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>METAFIELDY (wszystkie: 39)</h3>
+      <table><tr><th>Namespace</th><th>Key</th><th>Wartosc</th><th>Status</th></tr>
+      <tr class=""><td><code>custom</code></td><td>sku_produktu</td><td class="val">KL-A028-001-CT25</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>03_material_i_pielegnacja</td><td class="val">[&quot;bawełna&quot;]</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>03_material_i_pielegnacja_opis</td><td class="val">85% bawełna 15% poliester</td><td><span class="ok">OK</span></td></tr><tr class="row-warn"><td><code>custom</code></td><td>kolor</td><td class="val">[&quot;gid://shopify/Metaobject/97472545113&quot;]</td><td><span class="warn">duplikat duplikat 023_kolor_wiodacy</span></td></tr><tr class=""><td><code>custom</code></td><td>11_kaptur__plaszcze_bluzy_kurtki</td><td class="val">[&quot;Nie&quot;]</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>14_rodzaj_typ</td><td class="val">Kurtka jeansowa</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>08_dekolt</td><td class="val">[&quot;Kołnierz klasyczny&quot;]</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>09_ocieplenie__kurtki_plaszcze</td><td class="val">[&quot;Bez ocieplenia&quot;]</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>10_dlugosc_rekawa__sukienki_bluzy_swetry_kurtki</td><td class="val">[&quot;Długi rękaw&quot;]</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>15_fason_kroj</td><td class="val">Oversize</td><td><span class="ok">OK</span></td></tr><tr class="row-warn"><td><code>custom</code></td><td>16_zapiecie</td><td class="val">Na guziki</td><td><span class="warn">duplikat duplikat 039_zapiecie</span></td></tr><tr class="row-int"><td><code>pdp_internal</code></td><td>note</td><td class="val">A028</td><td><span style="color:#aaa">wewnetrzny</span></td></tr><tr class="row-int"><td><code>custom</code></td><td>id_oms</td><td class="val">11396</td><td><span style="color:#aaa">wewnetrzny</span></td></tr><tr class=""><td><code>mc-facebook</code></td><td>google_product_category</td><td class="val">5598</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>c_f</code></td><td>delivery_time</td><td class="val">do 24 godz.</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>tabela_rozmiar_html</td><td class="val">&lt;style type=&quot;text/css&quot;&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;b...</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>tabela_rozmiar_w_tekst</td><td class="val">*podane wymiary mierzone są „na płasko”, możliwa różnica +/- 2 cm
+**długość całkowita mierzona od ramienia przy szyi</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>20_kraj_produkcji</td><td class="val">[&quot;Polska&quot;]</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>_socialmedia_filtr_1</td><td class="val">bohemiansoul</td><td><span class="ok">OK</span></td></tr><tr class="row-warn"><td><code>custom</code></td><td>_socialmedia_parametr_rodzaj</td><td class="val">[&quot;wyprzedazmarzec&quot;]</td><td><span class="warn">stary tag</span></td></tr><tr class="row-warn"><td><code>custom</code></td><td>_socialmedia_filtr_2</td><td class="val">dostawaprzedswietami</td><td><span class="warn">stary tag</span></td></tr><tr class=""><td><code>custom</code></td><td>001_zawartosc_materialu_glownego</td><td class="val">85</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>002_zawartosc_materialu_2</td><td class="val">15</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>006_zawartosc_materialu_podszewki_1</td><td class="val">100</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>012_zawartosc_materialu_wykonczenia_1</td><td class="val">100</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>017_dlugosc</td><td class="val">normal</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>018_dlugosc_rekawa</td><td class="val">Długi Rękaw</td><td><span class="ok">OK</span></td></tr><tr class="row-warn"><td><code>custom</code></td><td>023_kolor_wiodacy</td><td class="val">gid://shopify/Metaobject/97472545113</td><td><span class="warn">duplikat duplikat kolor</span></td></tr><tr class=""><td><code>custom</code></td><td>024_kolnierz</td><td class="val">shirt collar</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>032_podkategoria</td><td class="val">Kurtka Jeansowa</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>038_wzor</td><td class="val">Nadruk</td><td><span class="ok">OK</span></td></tr><tr class="row-warn"><td><code>custom</code></td><td>039_zapiecie</td><td class="val">Na Guziki</td><td><span class="warn">duplikat duplikat 16_zapiecie</span></td></tr><tr class=""><td><code>custom</code></td><td>041_zawartosc_materialu_podszewki_kurtki_wewnetrznej_2</td><td class="val">100</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>044_kraj_produkcji</td><td class="val">Poland</td><td><span class="ok">OK</span></td></tr><tr class="row-int"><td><code>custom</code></td><td>045_notatka_wewnetrzna</td><td class="val">A028</td><td><span style="color:#aaa">wewnetrzny</span></td></tr><tr class=""><td><code>custom</code></td><td>001_material_glowny</td><td class="val">Bawełna</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>custom</code></td><td>002_material_2</td><td class="val">Poliester</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>ai_recs</code></td><td>product_refs</td><td class="val">[&quot;gid://shopify/Product/15736550556021&quot;,&quot;gid://shopify/Product/15647481463157&quot;,&quot;gid://shopify/Product/15036568863093&quot;,&quot;g...</td><td><span class="ok">OK</span></td></tr><tr class=""><td><code>ai_recs</code></td><td>reasons</td><td class="val">{&quot;label&quot;:&quot;najczęściej wybierane&quot;,&quot;items&quot;:[{&quot;reason&quot;:&quot;Luźne, pastelowe spodnie na wiosenne dni.&quot;},{&quot;reason&quot;:&quot;Kwiatowy wzó...</td><td><span class="ok">OK</span></td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>ZDJECIA</h3>
+      <table>
+        <tr><td>Liczba zdj</td><td>21</td></tr>
+        <tr><td>Bez alt textu</td><td><span class="err">21 z 21</span></td></tr>
+        <tr><td>Identyczne alt texty</td><td><span class="ok">nie</span></td></tr>
+        <tr><td>Video</td><td><span class="err">brak</span></td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>INNE DANE</h3>
+      <table>
+        <tr><td>Cena</td><td><strong>529.0 PLN</strong></td></tr>
+        <tr><td>compareAtPrice (XS/S)</td><td>529.00 PLN <span class="warn">compareAtPrice == cena</span></td></tr><tr><td>compareAtPrice (S/M)</td><td>529.00 PLN <span class="warn">compareAtPrice == cena</span></td></tr><tr><td>compareAtPrice (L/XL)</td><td>529.00 PLN <span class="warn">compareAtPrice == cena</span></td></tr>
+        <tr><td>Stan magazynowy</td><td>XS/S: 2 / S/M: 0 / L/XL: 0</td></tr>
+        <tr><td>Tagi</td><td><small>24h xmas, clubtropicana, czarna kurtka, kurtka czarna, kurtka jeansowa, kurtka jeansowa damska, kurtka jeansowa z nadrukiem, kurtka koszulowa, midseason25, NAOKO nowości, Nowości, ostatniaszansa1, sunspell, WSZYSTKIE PRODUKTY</small></td></tr>
+        <tr><td>Kolekcje</td><td><small>WSZYSTKIE PRODUKTY, Smart Products Filter Index - Do not delete, Kurtki damskie, Best Selling Products, Newest Products, kurtki koszulowe damskie, kurtki jeansowe damskie, PRODUKTY OD 99 ZŁ, PRODUKTY OD 199 PLN, Produkty od 149 PLN, Wszystkie produkty bez GYM HERO, omnibus-label-omnibus-compliant, Black Friday 2025 – Najlepsze promocje roku NAOKO, OSTATNIA SZANSA, DENIM, Kurtki wiosenne damskie, CLUB TROPICANA, Bohemian Soul, WSZYSTKIE PRODUKTY ARCHIWUM, Midseason</small></td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>OCENA CONTENTU</h3>
+      <table><tr><th>Obszar</th><th>Wynik</th><th>Komentarz</th></tr>
+        <tr><td>SEO</td><td class="sc-row score-bad">2/10</td><td>Brak SEO title (Admin); Brak SEO description (Admin); Meta desc za dluga (320 zn.)</td></tr>
+        <tr><td>Opis produktu</td><td class="sc-row score-good">10/10</td><td>OK</td></tr>
+        <tr><td>Zdjecia / alt</td><td class="sc-row score-bad">4/10</td><td>21/21 zdj bez alt textu; Brak video</td></tr>
+        <tr><td>Tabela rozmiarow</td><td class="sc-row score-warn">7/10</td><td>Brak sizechart_text</td></tr>
+        <tr><td>Metafieldy</td><td class="sc-row score-bad">5/10</td><td>Puste wymagane: ['custom.02_czas_wysylki']; Duplikaty: ['16_zapiecie&lt;&gt;039_zapiecie', 'kolor&lt;&gt;023_kolor_wiodacy']; Stale tagi: ['custom._socialmedia_parametr_rodzaj', 'custom._socialmedia_filtr_2']</td></tr>
+        <tr><td>Naglowki</td><td class="sc-row score-good">10/10</td><td>OK</td></tr>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.reco-section { margin-top:32px; padding-top:24px; border-top:2px solid #e5e5e5; }
+.reco-section h2 { font-size:15px; font-weight:700; margin-bottom:16px; color:#1a1a1a; }
+.reco-section .reco-subtitle { font-size:12px; color:#888; margin-bottom:20px; }
+.rec-card { background:#fff; border:1px solid #e5e5e5; border-radius:8px; margin-bottom:12px; overflow:hidden; }
+.rec-card.crit { border-left:4px solid #dc2626; }
+.rec-card.high { border-left:4px solid #f97316; }
+.rec-card.med  { border-left:4px solid #eab308; }
+.rec-card.low  { border-left:4px solid #94a3b8; }
+.rec-head { padding:12px 18px; display:flex; gap:8px; align-items:flex-start; background:#fafafa; border-bottom:1px solid #f0f0f0; flex-wrap:wrap; }
+.rec-head h3 { font-size:13px; font-weight:600; flex:1; min-width:180px; }
+.rec-body { padding:12px 18px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:700px) { .rec-body { grid-template-columns:1fr; } }
+.rec-field { font-size:13px; }
+.rec-field label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#888; display:block; margin-bottom:2px; }
+.rec-field p { line-height:1.5; }
+.rec-field.full { grid-column:1/-1; }
+.rec-field .akcja-text { background:#f8f8f8; padding:9px 11px; border-radius:6px; border-left:3px solid #6366f1; font-size:13px; line-height:1.6; }
+.badge-err  { background:#fee2e2; color:#991b1b; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-warn { background:#fef3c7; color:#92400e; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-global     { background:#ede9fe; color:#5b21b6; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-perproduct { background:#f0fdf4; color:#166534; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; }
+.prio-crit { background:#dc2626; color:#fff; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:700; }
+.prio-high { background:#f97316; color:#fff; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:700; }
+.prio-med  { background:#eab308; color:#fff; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:700; }
+.prio-low  { background:#94a3b8; color:#fff; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:700; }
+</style>
+<div class="reco-section">
+  <h2>Rekomendacje naprawcze (12)</h2>
+  <p class="reco-subtitle">
+    <span style="color:#dc2626;font-weight:700">1 krytyczne</span> &nbsp;·&nbsp; 
+    <span style="color:#f97316;font-weight:700">3 wysokie</span> &nbsp;·&nbsp; 
+    Globalne (dotycza calego sklepu) oznaczone fioletowym &nbsp;·&nbsp; Per produkt zielonym.
+  </p>
+  <div class="rec-card crit">
+  <div class="rec-head">
+    <h3>GTM zakomentowany w szablonie</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-crit">KRYTYCZNY</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Odkomentuj {% include 'naoko-gtm-tag-head' %} w layout/theme.liquid LUB skonfiguruj GTM przez Shopify Markets → Pixels. Bez GTM: brak GA4 i zdarzen konwersji</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Tech / Marketing</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>15 min</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Krytyczny — brak pomiaru konwersji</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Brak SEO title (Admin)</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij SEO title recznie w Shopify Admin → Products → [produkt] → Search engine listing → Edit</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Content / SEO</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>5 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Wysoki — Shopify generuje fallback z nazwy produktu, brak keyword targetingu</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Brak SEO description (Admin)</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij meta description w Shopify Admin → Search engine listing. Max 160 zn., zawrzyj glowny keyword + USP produktu</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Content / SEO</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>5 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Sredni — wpływa na CTR w wynikach Google</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>21/21 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Content / SEO</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>10 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>Brak video</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Dodaj krotki film produktowy (5-15s) do galerii. Mozna uzyc istniejacych klipy z IG/Stories</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Marketing / Content</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>1-2h (nagranie + upload)</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Wysoki — video zwieksza konwersje na PDP srednio o 15-25%</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Brak sizechart_text</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij metafield c_f.sizechart_text — lista rozmiarow tekstowo (np. 'XS S M L XL'). Uzywany do weryfikacji spojnosci wariantow</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>5 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — wewnetrzna weryfikacja</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Meta desc za dluga (320 zn.)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Skroc meta description do max 160 znakow w Shopify Admin → Search engine listing</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Content / SEO</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>3 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — Google obcina opis, traci czytelnosc</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Stale tagi: ['custom._socialmedia_parametr_rodzaj', 'custom._socialmedia_filtr_2']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Kosmetyczny</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun stare tagi kampanijne (_socialmedia_parametr_rodzaj, _socialmedia_filtr_2) — nie sa juz uzywane</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>2 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — smieci w danych</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>Puste wymagane: ['custom.02_czas_wysylki']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij wymagane metafieldy: custom.02_czas_wysylki (czas wysylki) i custom.001_material_glowny (material). Uzywane w filtrach i PDP</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations / Content</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>5 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Sredni — puste metafieldy = brak w filtrach kolekcji</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Duplikaty: ['16_zapiecie&lt;&gt;039_zapiecie', 'kolor&lt;&gt;023_kolor_wiodacy', '13_dlugosc&lt;&gt;017_dlugosc']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun zduplikowane metafieldy — zostaw nowy klucz, wyczysc stary (np. custom.023_kolor_wiodacy zamiast custom.kolor)</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>3 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — brud w danych, moze powodowac konflikty przy automatyzacjach</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>compareAtPrice == cena na wariancie XS/S</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun compareAtPrice lub ustaw wyzszy — aktualnie nie ma realnej promocji (cena == cena porownawcza)</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations / Ecommerce</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>2 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Duplikaty: ['16_zapiecie&lt;&gt;039_zapiecie', 'kolor&lt;&gt;023_kolor_wiodacy']</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-low">Niski</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Usun zduplikowane metafieldy — zostaw nowy klucz, wyczysc stary (np. custom.023_kolor_wiodacy zamiast custom.kolor)</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Operations</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>3 min / produkt</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — brud w danych, moze powodowac konflikty przy automatyzacjach</p>
+    </div>
+    
+  </div>
+</div>
+</div>
+</div>
+</body>
+</html>
