@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
@@ -50,35 +50,81 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 <body>
 <div class="topbar">
   <h1>NAOKO Monitor — Rekomendacje</h1>
-  <small>Sesja: scan_20260513_170137 &nbsp;·&nbsp; 2026-05-13 17:43 &nbsp;·&nbsp; 200 produktow &nbsp;·&nbsp; 66 rekomendacji</small>
+  <small>Sesja: scan_20260514_143609 &nbsp;·&nbsp; 2026-05-14 14:51 &nbsp;·&nbsp; 200 produktow &nbsp;·&nbsp; 69 rekomendacji</small>
 </div>
 <div class="summary">
   <div class="sum-box sum-crit"><b>1</b><span>Krytyczne</span></div>
-  <div class="sum-box sum-warn"><b>23</b><span>Wysokie</span></div>
-  <div class="sum-box"><b>9</b><span>Globalne (napraw raz)</span></div>
-  <div class="sum-box"><b>57</b><span>Per produkt</span></div>
+  <div class="sum-box sum-warn"><b>24</b><span>Wysokie</span></div>
+  <div class="sum-box"><b>11</b><span>Globalne (napraw raz)</span></div>
+  <div class="sum-box"><b>58</b><span>Per produkt</span></div>
   <div class="sum-box"><b>200</b><span>Produktow w sesji</span></div>
 </div>
 <div class="content">
-<div class="group-header">Globalne (szablon / wszyscy) (9)</div>
+<div class="group-header">Globalne (szablon / wszyscy) (11)</div>
 <div class="rec-card crit">
   <div class="rec-head">
-    <h3>GTM zakomentowany w szablonie</h3>
-    <span class="badge-warn">WARN</span>
+    <h3>GTM zakomentowany w snippecie naoko-gtm-tag-head.liquid</h3>
+    <span class="badge-err">ERROR</span>
     <span class="badge-global">GLOBALNY</span>
     <span class="prio-crit">KRYTYCZNY</span>
   </div>
   <div class="rec-body">
     <div class="rec-field full">
       <label>Akcja</label>
-      <div class="akcja-text">Odkomentuj {% include 'naoko-gtm-tag-head' %} w layout/theme.liquid LUB skonfiguruj GTM przez Shopify Markets → Pixels. Bez GTM: brak GA4 i zdarzen konwersji</div>
+      <div class="akcja-text">Odkomentuj kod GTM w snippets/naoko-gtm-tag-head.liquid — usun {% comment %} i {% endcomment %} owijajace blok &lt;script&gt;(function(w,d,s... Bez tego GA4 i konwersje Meta Ads nie dzialaja</div>
     </div>
     <div class="rec-field"><label>Dzial wlascicielski</label><p>Tech / Marketing</p></div>
-    <div class="rec-field"><label>Czas naprawy</label><p>15 min</p></div>
-    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Krytyczny — brak pomiaru konwersji</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>5 min</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Krytyczny — brak pomiaru konwersji i ROAS w Meta Ads</p></div>
     <div class="rec-field">
       <label>Zakres (200 / 200 — 100.0%)</label>
-      <p>GLOBALNY — szablon</p>
+      <p>GLOBALNY — szablon (dotyczy calego sklepu)</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:100.0%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>GTM noscript (body tag) zakomentowany w theme.liquid</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Kosmetyczny</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Odkomentuj include 'naoko-gtm-tag-body' w layout/theme.liquid — to tag &lt;noscript&gt; GTM dla uzytkow bez JS. Niski priorytet ale poprawia pokrycie.</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Tech</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>5 min</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — dotyczy ~1% uzytkownikow bez JavaScript</p></div>
+    <div class="rec-field">
+      <label>Zakres (200 / 200 — 100.0%)</label>
+      <p>GLOBALNY — szablon (dotyczy calego sklepu)</p>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:100.0%"></div></div>
+    </div>
+    
+  </div>
+</div>
+<div class="rec-card high">
+  <div class="rec-head">
+    <h3>Meta Pixel aktywny tylko warunkowo (tylko: /pages/micra)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Przeniesc kod fbq() z warunku if request.path do sekcji globalnej snippets/naoko-gtm-tag-head.liquid LUB skonfigurowac pixel przez Shopify Customer Events (Settings &gt; Customer Events &gt; Meta Pixel). Pixel musi sledzic wszystkie strony aby optymalizacja kampanii Meta dzialala poprawnie.</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Marketing / Tech</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>30 min</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — brak ViewContent/AddToCart/Purchase = slepa optymalizacja kampanii</p></div>
+    <div class="rec-field">
+      <label>Zakres (200 / 200 — 100.0%)</label>
+      <p>GLOBALNY — szablon (dotyczy calego sklepu)</p>
       <div class="affected-bar"><div class="affected-fill high-pct" style="width:100.0%"></div></div>
     </div>
     
@@ -215,9 +261,9 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — smieci w danych</p></div>
     <div class="rec-field">
-      <label>Zakres (170 / 200 — 85.0%)</label>
+      <label>Zakres (178 / 200 — 89.0%)</label>
       <p>GLOBALNY — napraw raz dla wszystkich</p>
-      <div class="affected-bar"><div class="affected-fill high-pct" style="width:85.0%"></div></div>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:89.0%"></div></div>
     </div>
     
   </div>
@@ -238,9 +284,9 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>5 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — puste metafieldy = brak w filtrach kolekcji</p></div>
     <div class="rec-field">
-      <label>Zakres (160 / 200 — 80.0%)</label>
+      <label>Zakres (159 / 200 — 79.5%)</label>
       <p>GLOBALNY — napraw raz dla wszystkich</p>
-      <div class="affected-bar"><div class="affected-fill high-pct" style="width:80.0%"></div></div>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:79.5%"></div></div>
     </div>
     
   </div>
@@ -261,9 +307,9 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>3 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — brud w danych, moze powodowac konflikty przy automatyzacjach</p></div>
     <div class="rec-field">
-      <label>Zakres (107 / 200 — 53.5%)</label>
+      <label>Zakres (106 / 200 — 53.0%)</label>
       <p>GLOBALNY — napraw raz dla wszystkich</p>
-      <div class="affected-bar"><div class="affected-fill high-pct" style="width:53.5%"></div></div>
+      <div class="affected-bar"><div class="affected-fill high-pct" style="width:53.0%"></div></div>
     </div>
     
   </div>
@@ -307,11 +353,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>5 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — puste metafieldy = brak w filtrach kolekcji</p></div>
     <div class="rec-field">
-      <label>Zakres (40 / 200 — 20.0%)</label>
-      <p>PER PRODUKT — 40 produktow</p>
-      <div class="affected-bar"><div class="affected-fill " style="width:20.0%"></div></div>
+      <label>Zakres (41 / 200 — 20.5%)</label>
+      <p>PER PRODUKT — 41 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:20.5%"></div></div>
     </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-mon-amour, bomberka-jeansowa-careless-whisper, bomberka-jeansowa-no-rules, bomberka-pikowana-oversize-wind-of-change, dluga-sukienka-cinnamon-wave, dluga-sukienka-muslinowa-savannah, dluga-sukienka-z-wiazaniem-gypsy-dream, e-karta-podarunkowa, kamizelka-dwustronna-dream-wild, karta-podarunkowa, kimono-sunkissed-soul, kl-ia041-001-it23, kombinezon-lniany-blue-margarita, kombinezon-multiway-mulberry-dream, koszula-jeansowa-la-dolce-pausa, koszula-somewhere-sunny, koszula-z-rozcieciem-na-plecach-bluebell, koszula-z-rozcieciem-na-plecach-sweetheart, kurtka-dwustronna-z-kapturem-poppy-double-crush ... (+20 wiecej)</div></div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-mon-amour, bomberka-jeansowa-careless-whisper, bomberka-jeansowa-no-rules, bomberka-pikowana-oversize-wind-of-change, dluga-sukienka-cinnamon-wave, dluga-sukienka-muslinowa-savannah, dluga-sukienka-z-wiazaniem-gypsy-dream, e-karta-podarunkowa, kamizelka-dwustronna-dream-wild, karta-podarunkowa, kimono-sunkissed-soul, kl-ia041-001-it23, kombinezon-lniany-blue-margarita, kombinezon-multiway-mulberry-dream, koszula-jeansowa-la-dolce-pausa, koszula-somewhere-sunny, koszula-z-rozcieciem-na-plecach-bluebell, koszula-z-rozcieciem-na-plecach-sweetheart, kurtka-dwustronna-z-kapturem-poppy-double-crush ... (+21 wiecej)</div></div>
   </div>
 </div>
 <div class="rec-card low">
@@ -376,11 +422,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Niski — smieci w danych</p></div>
     <div class="rec-field">
-      <label>Zakres (23 / 200 — 11.5%)</label>
-      <p>PER PRODUKT — 23 produktow</p>
-      <div class="affected-bar"><div class="affected-fill " style="width:11.5%"></div></div>
+      <label>Zakres (15 / 200 — 7.5%)</label>
+      <p>PER PRODUKT — 15 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:7.5%"></div></div>
     </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-mon-amour, bluza-poddle-giggles, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-one-more-ciao, dluga-sukienka-z-wiazaniem-earth-dancer, dluga-sukienka-z-wiazaniem-gypsy-dream, dlugi-kardigan-moherowy-lavender-blush, kamizelka-dwustronna-dream-wild, kimono-sunkissed-soul, kl-ia041-001-it23, kombinezon-multiway-mulberry-dream, koszula-z-laczonych-tkanin-fresh-attitude, koszula-z-rozcieciem-na-plecach-bluebell, lniana-spodniczka-mini-moon-jane, marynarka-sweet-rebellion, sukienka-multiway-carmine-love, sweter-candy-cloud ... (+3 wiecej)</div></div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-mon-amour, dluga-sukienka-z-wiazaniem-earth-dancer, dluga-sukienka-z-wiazaniem-gypsy-dream, dlugi-kardigan-moherowy-lavender-blush, kamizelka-dwustronna-dream-wild, kimono-sunkissed-soul, kl-ia041-001-it23, kombinezon-multiway-mulberry-dream, lniana-spodniczka-mini-moon-jane, marynarka-sweet-rebellion, sukienka-multiway-carmine-love, sweter-candy-cloud, sweter-z-welna-retro-glam, torebka-skorzana-typu-shopper-violette</div></div>
   </div>
 </div>
 <div class="rec-card low">
@@ -514,11 +560,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
     <div class="rec-field">
-      <label>Zakres (17 / 200 — 8.5%)</label>
-      <p>PER PRODUKT — 17 produktow</p>
-      <div class="affected-bar"><div class="affected-fill " style="width:8.5%"></div></div>
+      <label>Zakres (18 / 200 — 9.0%)</label>
+      <p>PER PRODUKT — 18 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:9.0%"></div></div>
     </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-friends, bluza-rozpinana-starfish, dluga-sukienka-z-wiazaniem-earth-dancer, klasyczny-trencz-fragola, koszula-z-laczonych-tkanin-fresh-attitude, kurtka-ramoneska-urban-sunrise, lniana-spodniczka-mini-moon-jane, spodnie-jeansowe-ribbon-revolution, sukienka-maxi-z-odkrytymi-plecami-dakota, sukienka-midi-dwustronna-rosabella, sukienka-midi-pure-romance, sukienka-mini-dakota-flower, sukienka-mini-my-love-side, sukienka-na-ramiaczkach-florentine, szorty-desert-lily, t-shirt-espresso-yourself, top-bokserka-color-revolution</div></div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-friends, bluza-rozpinana-starfish, dluga-sukienka-z-wiazaniem-earth-dancer, klasyczny-trencz-fragola, koszula-z-laczonych-tkanin-fresh-attitude, kurtka-ramoneska-urban-sunrise, lekka-kurtka-dreamy-denim, lniana-spodniczka-mini-moon-jane, spodnie-jeansowe-ribbon-revolution, sukienka-maxi-z-odkrytymi-plecami-dakota, sukienka-midi-dwustronna-rosabella, sukienka-midi-pure-romance, sukienka-mini-dakota-flower, sukienka-mini-my-love-side, sukienka-na-ramiaczkach-florentine, szorty-desert-lily, t-shirt-espresso-yourself, top-bokserka-color-revolution</div></div>
   </div>
 </div>
 <div class="rec-card med">
@@ -592,29 +638,6 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 </div>
 <div class="rec-card med">
   <div class="rec-head">
-    <h3>13/13 zdj bez alt textu</h3>
-    <span class="badge-err">ERROR</span>
-    <span class="badge-perproduct">PER PRODUKT</span>
-    <span class="prio-med">Sredni</span>
-  </div>
-  <div class="rec-body">
-    <div class="rec-field full">
-      <label>Akcja</label>
-      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
-    </div>
-    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
-    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
-    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
-    <div class="rec-field">
-      <label>Zakres (10 / 200 — 5.0%)</label>
-      <p>PER PRODUKT — 10 produktow</p>
-      <div class="affected-bar"><div class="affected-fill " style="width:5.0%"></div></div>
-    </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-mon-amour, bluza-poddle-giggles, bluza-polo-mystic-plum, kardigan-welniany-lovely-beat, kurtka-jeansowa-her-rules, kurtka-zimowa-misty-woods, lekka-kurtka-pikowana-pistachio-blush, lniana-sukienka-bay-breeze, sweter-heather-spell, trencz-krotki-classic-bloom</div></div>
-  </div>
-</div>
-<div class="rec-card med">
-  <div class="rec-head">
     <h3>17/17 zdj bez alt textu</h3>
     <span class="badge-err">ERROR</span>
     <span class="badge-perproduct">PER PRODUKT</span>
@@ -634,6 +657,29 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
       <div class="affected-bar"><div class="affected-fill " style="width:5.0%"></div></div>
     </div>
     <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">dlugi-kardigan-urban-picnic, kurtka-cinnamon-hug, kurtka-dwustronna-z-kapturem-poppy-mystic-garden, parka-dwustronna-pixel-love, sukienka-maxi-na-ramiaczkach-chocolate-mocha, sukienka-na-jedno-ramie-seabreeze, sukienka-na-ramiaczkach-painted-memories, sukienka-na-ramiaczkach-tuscan-romance, szerokie-spodnie-z-lnem-blue-margarita, t-shirt-how-you-doin</div></div>
+  </div>
+</div>
+<div class="rec-card med">
+  <div class="rec-head">
+    <h3>13/13 zdj bez alt textu</h3>
+    <span class="badge-err">ERROR</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-med">Sredni</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Uzupelnij alt text dla wszystkich zdj w Shopify Admin → Products → [produkt] → Media. Format: '[nazwa produktu] — [kolor/material] — NAOKO'</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Content / SEO</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>10 min / produkt</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Sredni — brak alt = zdjecia niewidoczne dla Google Images + WCAG</p></div>
+    <div class="rec-field">
+      <label>Zakres (9 / 200 — 4.5%)</label>
+      <p>PER PRODUKT — 9 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:4.5%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">bluza-mon-amour, bluza-poddle-giggles, bluza-polo-mystic-plum, kardigan-welniany-lovely-beat, kurtka-jeansowa-her-rules, lekka-kurtka-pikowana-pistachio-blush, lniana-sukienka-bay-breeze, sweter-heather-spell, trencz-krotki-classic-bloom</div></div>
   </div>
 </div>
 <div class="rec-card med">
@@ -1135,11 +1181,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
     <div class="rec-field">
-      <label>Zakres (66 / 200 — 33.0%)</label>
-      <p>PER PRODUKT — 66 produktow</p>
-      <div class="affected-bar"><div class="affected-fill " style="width:33.0%"></div></div>
+      <label>Zakres (67 / 200 — 33.5%)</label>
+      <p>PER PRODUKT — 67 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:33.5%"></div></div>
     </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+46 wiecej)</div></div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+47 wiecej)</div></div>
   </div>
 </div>
 <div class="rec-card high">
@@ -1158,11 +1204,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
     <div class="rec-field">
-      <label>Zakres (66 / 200 — 33.0%)</label>
-      <p>PER PRODUKT — 66 produktow</p>
-      <div class="affected-bar"><div class="affected-fill " style="width:33.0%"></div></div>
+      <label>Zakres (67 / 200 — 33.5%)</label>
+      <p>PER PRODUKT — 67 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:33.5%"></div></div>
     </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+46 wiecej)</div></div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+47 wiecej)</div></div>
   </div>
 </div>
 <div class="rec-card high">
@@ -1181,11 +1227,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
     <div class="rec-field">
-      <label>Zakres (66 / 200 — 33.0%)</label>
-      <p>PER PRODUKT — 66 produktow</p>
-      <div class="affected-bar"><div class="affected-fill " style="width:33.0%"></div></div>
+      <label>Zakres (67 / 200 — 33.5%)</label>
+      <p>PER PRODUKT — 67 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:33.5%"></div></div>
     </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+46 wiecej)</div></div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+47 wiecej)</div></div>
   </div>
 </div>
 <div class="rec-card high">
@@ -1204,11 +1250,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
     <div class="rec-field">
-      <label>Zakres (65 / 200 — 32.5%)</label>
-      <p>PER PRODUKT — 65 produktow</p>
-      <div class="affected-bar"><div class="affected-fill " style="width:32.5%"></div></div>
+      <label>Zakres (66 / 200 — 33.0%)</label>
+      <p>PER PRODUKT — 66 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:33.0%"></div></div>
     </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+45 wiecej)</div></div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+46 wiecej)</div></div>
   </div>
 </div>
 <div class="rec-card high">
@@ -1227,11 +1273,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field"><label>Czas naprawy</label><p>2 min / produkt</p></div>
     <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p></div>
     <div class="rec-field">
-      <label>Zakres (65 / 200 — 32.5%)</label>
-      <p>PER PRODUKT — 65 produktow</p>
-      <div class="affected-bar"><div class="affected-fill " style="width:32.5%"></div></div>
+      <label>Zakres (66 / 200 — 33.0%)</label>
+      <p>PER PRODUKT — 66 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:33.0%"></div></div>
     </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+45 wiecej)</div></div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-friends, bluza-love-language, bluza-poddle-giggles, bluza-rozpinana-coffee-break, bluza-rozpinana-love-letter, bluza-rozpinana-starfish, bluza-tutto-bene, bluza-z-kapturem-bonjour-cherie, bluza-z-kapturem-candy-forest, bluza-z-kapturem-fall-in-love, bluza-z-kapturem-one-more-ciao, dluga-sukienka-taliowana-marigold-kiss, kamizelka-dwustronna-teddy-dunes, klasyczny-trencz-fragola, klasyczny-trencz-midnight-roar, kombinezon-lniany-blue-margarita, kurtka-candy-glow, kurtka-cinnamon-hug, kurtka-dwustronna-pink-cheetah ... (+46 wiecej)</div></div>
   </div>
 </div>
 <div class="rec-card high">
@@ -1417,6 +1463,29 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     </div>
     <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">t-shirt-my-best-life</div></div>
   </div>
+</div><div class="group-header">Per produkt — Locale EN (1)</div>
+<div class="rec-card low">
+  <div class="rec-head">
+    <h3>Brak EN wersji produktu (nie znaleziono w naoko-store.com)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-perproduct">PER PRODUKT</span>
+    <span class="prio-low">Do oceny</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Przejrzyj recznie: Brak EN wersji produktu (nie znaleziono w naoko-store.com)</div>
+    </div>
+    <div class="rec-field"><label>Dzial wlascicielski</label><p>Operations</p></div>
+    <div class="rec-field"><label>Czas naprawy</label><p>Do ustalenia</p></div>
+    <div class="rec-field"><label>Wplyw na sprzedaz</label><p>Do oceny</p></div>
+    <div class="rec-field">
+      <label>Zakres (12 / 200 — 6.0%)</label>
+      <p>PER PRODUKT — 12 produktow</p>
+      <div class="affected-bar"><div class="affected-fill " style="width:6.0%"></div></div>
+    </div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">belle-vie, bluza-polo-mystic-plum, e-karta-podarunkowa, kombinezon-multiway-mulberry-dream, koszula-line-dancer, lekka-kurtka-pikowana-blossom-charm, spodnie-crochet-whispering-dunes, sukienka-mini-dakota-flower, sukienka-na-ramiaczkach-primrose, sweter-z-krotkim-rekawem-candy-crush, t-shirt-how-you-doin, t-shirt-my-best-life</div></div>
+  </div>
 </div><div class="group-header">Per produkt — Opis (7)</div>
 <div class="rec-card high">
   <div class="rec-head">
@@ -1489,7 +1558,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 </div>
 <div class="rec-card high">
   <div class="rec-head">
-    <h3>Opis za krotki (560 zn., min 600)</h3>
+    <h3>Opis za krotki (587 zn., min 600)</h3>
     <span class="badge-warn">WARN</span>
     <span class="badge-perproduct">PER PRODUKT</span>
     <span class="prio-high">Wysoki</span>
@@ -1507,7 +1576,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
       <p>PER PRODUKT — 1 produktow</p>
       <div class="affected-bar"><div class="affected-fill " style="width:0.5%"></div></div>
     </div>
-    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">kurtka-zimowa-misty-woods</div></div>
+    <div class="rec-field full"><label>Dotkniete produkty</label><div class="handles-list">lekka-kurtka-dreamy-denim</div></div>
   </div>
 </div>
 <div class="rec-card high">

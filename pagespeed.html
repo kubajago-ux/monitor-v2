@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NAOKO PageSpeed — pagespeed_20260514_145400</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f5f5f5; color:#1a1a1a; font-size:14px; }
+.topbar { background:#1a1a1a; color:#fff; padding:14px 32px; }
+.topbar h1 { font-size:17px; font-weight:700; display:inline-block; margin-right:16px; }
+.topbar small { color:#999; font-size:12px; }
+.sum-bar { background:#fff; border-bottom:1px solid #e5e5e5; padding:12px 32px; display:flex; gap:28px; flex-wrap:wrap; }
+.sum-box { display:flex; flex-direction:column; gap:1px; }
+.sum-box b { font-size:22px; font-weight:700; }
+.sum-box span { font-size:11px; color:#888; }
+.content { max-width:1400px; margin:0 auto; padding:24px 32px; }
+.filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
+.filters input { padding:7px 12px; border:1px solid #ddd; border-radius:6px; font-size:13px; width:300px; }
+.filters select { padding:7px 10px; border:1px solid #ddd; border-radius:6px; font-size:13px; }
+.tbl-wrap { background:#fff; border-radius:8px; border:1px solid #e5e5e5; overflow:auto; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+thead th { padding:10px 12px; background:#f8f8f8; border-bottom:2px solid #e5e5e5; font-weight:600;
+           font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:#555;
+           cursor:pointer; user-select:none; white-space:nowrap; }
+thead th.sort-asc::after  { content:' ↑'; color:#6366f1; }
+thead th.sort-desc::after { content:' ↓'; color:#6366f1; }
+tbody td { padding:9px 12px; border-bottom:1px solid #f5f5f5; vertical-align:middle; }
+.url-cell { font-family:monospace; font-size:11px; color:#6366f1; max-width:380px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.url-cell a { color:#6366f1; text-decoration:none; }
+.url-cell a:hover { text-decoration:underline; }
+.score-cell { text-align:center; font-weight:700; font-size:14px; padding:4px 10px; border-radius:6px; min-width:44px; display:inline-block; }
+.metric-cell { text-align:center; font-weight:600; padding:3px 8px; border-radius:4px; font-size:12px; display:inline-block; min-width:50px; }
+.good { background:#d1fae5; color:#065f46; }
+.ni   { background:#fef3c7; color:#92400e; }
+.poor { background:#fee2e2; color:#991b1b; }
+.na   { background:#f3f4f6; color:#6b7280; }
+.strategy-mobile  { background:#e0e7ff; color:#3730a3; padding:2px 7px; border-radius:4px; font-size:10px; font-weight:600; }
+.strategy-desktop { background:#fae8ff; color:#86198f; padding:2px 7px; border-radius:4px; font-size:10px; font-weight:600; }
+.legend { background:#fff; border:1px solid #e5e5e5; border-radius:8px; padding:14px 20px; margin-bottom:16px; font-size:12px; }
+.legend b { display:block; margin-bottom:6px; }
+.legend span { margin-right:14px; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>NAOKO PageSpeed Audit</h1>
+  <small>Sesja: pagespeed_20260514_145400 · 2026-05-14 14:57 · 4 URLi</small>
+  <nav style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="index.html" style="color:#fff;background:#444;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600">PDP Audit</a>
+    <a href="recommendations.html" style="color:#fff;background:#444;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600">Rekomendacje</a>
+    <a href="crawl.html" style="color:#fff;background:#444;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600">Crawl (Orphans/Broken)</a>
+    <a href="pagespeed.html" style="color:#fff;background:#6366f1;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600">PageSpeed (CWV)</a>
+  </nav>
+</div>
+<div class="sum-bar">
+  <div class="sum-box"><b>4</b><span>URLi przetestowanych</span></div>
+  <div class="sum-box"><b>46.0</b><span>Avg score mobile</span></div>
+  <div class="sum-box"><b>36.0</b><span>Avg score desktop</span></div>
+  <div class="sum-box"><b>3</b><span>Poor LCP (mobile)</span></div>
+  <div class="sum-box"><b>0</b><span>Poor CLS (mobile)</span></div>
+  <div class="sum-box"><b>3</b><span>Poor INP (mobile)</span></div>
+</div>
+<div class="content">
+  <div class="legend">
+    <b>Core Web Vitals — progi Google:</b>
+    <span><b>LCP</b> (Largest Contentful Paint): <span class="metric-cell good">≤2.5s</span> dobry · <span class="metric-cell ni">2.5-4s</span> sredni · <span class="metric-cell poor">&gt;4s</span> zly</span><br>
+    <span><b>CLS</b> (Cumulative Layout Shift): <span class="metric-cell good">≤0.1</span> · <span class="metric-cell ni">0.1-0.25</span> · <span class="metric-cell poor">&gt;0.25</span></span><br>
+    <span><b>INP</b> (Interaction to Next Paint): <span class="metric-cell good">≤200ms</span> · <span class="metric-cell ni">200-500ms</span> · <span class="metric-cell poor">&gt;500ms</span></span><br>
+    <span><b>Score</b>: <span class="metric-cell good">≥90</span> · <span class="metric-cell ni">50-89</span> · <span class="metric-cell poor">&lt;50</span></span>
+  </div>
+  <div class="filters">
+    <input type="text" id="search" placeholder="Szukaj po URL..." oninput="filterTable()">
+  </div>
+  <div class="tbl-wrap">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">URL</th>
+          <th onclick="sortTable(1)" colspan="5"><span class="strategy-mobile">MOBILE</span></th>
+          <th onclick="sortTable(6)" colspan="5"><span class="strategy-desktop">DESKTOP</span></th>
+        </tr>
+        <tr>
+          <th></th>
+          <th onclick="sortTable(1)">Score</th>
+          <th onclick="sortTable(2)">LCP</th>
+          <th onclick="sortTable(3)">CLS</th>
+          <th onclick="sortTable(4)">INP</th>
+          <th onclick="sortTable(5)">FCP</th>
+          <th onclick="sortTable(6)">Score</th>
+          <th onclick="sortTable(7)">LCP</th>
+          <th onclick="sortTable(8)">CLS</th>
+          <th onclick="sortTable(9)">INP</th>
+          <th onclick="sortTable(10)">FCP</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"><tr>
+  <td class="url-cell"><a href="https://naoko-store.pl/" target="_blank" title="https://naoko-store.pl/">/</a></td>
+  <td><span class="score-cell poor">42</span></td>
+  <td><span class="metric-cell poor">11.4s</span></td>
+  <td><span class="metric-cell good">0.011</span></td>
+  <td><span class="metric-cell poor">22.6s</span></td>
+  <td><span class="metric-cell poor">4.5s</span></td>
+  <td><span class="score-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+</tr><tr>
+  <td class="url-cell"><a href="https://naoko-store.pl/collections/sukienki" target="_blank" title="https://naoko-store.pl/collections/sukienki">/collections/sukienki</a></td>
+  <td><span class="score-cell poor">47</span></td>
+  <td><span class="metric-cell poor">17.0s</span></td>
+  <td><span class="metric-cell good">0.000</span></td>
+  <td><span class="metric-cell poor">21.8s</span></td>
+  <td><span class="metric-cell poor">4.8s</span></td>
+  <td><span class="score-cell poor">37</span></td>
+  <td><span class="metric-cell poor">6.8s</span></td>
+  <td><span class="metric-cell good">0.015</span></td>
+  <td><span class="metric-cell poor">6.9s</span></td>
+  <td><span class="metric-cell good">520ms</span></td>
+</tr><tr>
+  <td class="url-cell"><a href="https://naoko-store.pl/collections/nowosci" target="_blank" title="https://naoko-store.pl/collections/nowosci">/collections/nowosci</a></td>
+  <td><span class="score-cell poor">49</span></td>
+  <td><span class="metric-cell poor">20.9s</span></td>
+  <td><span class="metric-cell good">0.001</span></td>
+  <td><span class="metric-cell poor">21.4s</span></td>
+  <td><span class="metric-cell ni">2.8s</span></td>
+  <td><span class="score-cell poor">35</span></td>
+  <td><span class="metric-cell poor">7.0s</span></td>
+  <td><span class="metric-cell good">0.054</span></td>
+  <td><span class="metric-cell poor">7.0s</span></td>
+  <td><span class="metric-cell good">504ms</span></td>
+</tr><tr>
+  <td class="url-cell"><a href="https://naoko-store.pl/collections/wyprzedaz" target="_blank" title="https://naoko-store.pl/collections/wyprzedaz">/collections/wyprzedaz</a></td>
+  <td><span class="score-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="score-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+  <td><span class="metric-cell na">-</span></td>
+</tr></tbody>
+    </table>
+  </div>
+</div>
+<script>
+let sortCol = -1, sortDir = 1;
+function filterTable() {
+  const q = document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('#tbody tr').forEach(tr => {
+    tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+function parseVal(td) {
+  const t = td.textContent.trim().replace(/[^\d.]/g,'');
+  return t ? parseFloat(t) : -1;
+}
+function sortTable(col) {
+  if (sortCol === col) sortDir = -sortDir; else { sortCol = col; sortDir = 1; }
+  const tbody = document.getElementById('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.sort((a,b) => {
+    const av = parseVal(a.cells[col]);
+    const bv = parseVal(b.cells[col]);
+    return (av - bv) * sortDir;
+  });
+  rows.forEach(r => tbody.appendChild(r));
+}
+</script>
+</body>
+</html>

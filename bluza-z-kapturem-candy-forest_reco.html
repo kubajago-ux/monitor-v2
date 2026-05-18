@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
@@ -58,10 +58,10 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 <body>
 <div class="topbar">
   <h1>NAOKO Monitor — Rekomendacje</h1>
-  <small>Sesja: scan_20260513_170137 &nbsp;·&nbsp; 2026-05-13 17:43</small>
+  <small>Sesja: scan_20260514_143609 &nbsp;·&nbsp; 2026-05-14 14:51</small>
 </div>
 <div class="back-bar">
-  <a href="index.html">&larr; Dashboard</a>
+  <a href="dashboard.html">&larr; Dashboard</a>
   <span class="sep">|</span>
   <a href="bluza-z-kapturem-candy-forest.html">Pelna analiza produktu</a>
 </div>
@@ -71,23 +71,23 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 </div>
 <div class="sum-bar">
   <div class="sum-box c-crit"><b>1</b><span>Krytyczne</span></div>
-  <div class="sum-box c-high"><b>7</b><span>Wysokie</span></div>
-  <div class="sum-box c-glob"><b>9</b><span>Globalne</span></div>
-  <div class="sum-box c-prod"><b>8</b><span>Per produkt</span></div>
-  <div class="sum-box"><b>17</b><span>Lacznie</span></div>
+  <div class="sum-box c-high"><b>8</b><span>Wysokie</span></div>
+  <div class="sum-box c-glob"><b>11</b><span>Globalne</span></div>
+  <div class="sum-box c-prod"><b>7</b><span>Per produkt</span></div>
+  <div class="sum-box"><b>18</b><span>Lacznie</span></div>
 </div>
 <div class="content">
-<div class="group-header">Globalne (dotycza calego sklepu) (9)</div><div class="rec-card crit">
+<div class="group-header">Globalne (dotycza calego sklepu) (11)</div><div class="rec-card crit">
   <div class="rec-head">
-    <h3>GTM zakomentowany w szablonie</h3>
-    <span class="badge-warn">WARN</span>
+    <h3>GTM zakomentowany w snippecie naoko-gtm-tag-head.liquid</h3>
+    <span class="badge-err">ERROR</span>
     <span class="badge-global">GLOBALNY</span>
     <span class="prio-crit">KRYTYCZNY</span>
   </div>
   <div class="rec-body">
     <div class="rec-field full">
       <label>Akcja</label>
-      <div class="akcja-text">Odkomentuj {% include 'naoko-gtm-tag-head' %} w layout/theme.liquid LUB skonfiguruj GTM przez Shopify Markets → Pixels. Bez GTM: brak GA4 i zdarzen konwersji</div>
+      <div class="akcja-text">Odkomentuj kod GTM w snippets/naoko-gtm-tag-head.liquid — usun {% comment %} i {% endcomment %} owijajace blok &lt;script&gt;(function(w,d,s... Bez tego GA4 i konwersje Meta Ads nie dzialaja</div>
     </div>
     <div class="rec-field">
       <label>Dzial wlascicielski</label>
@@ -95,11 +95,63 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     </div>
     <div class="rec-field">
       <label>Szacowany czas naprawy</label>
-      <p>15 min</p>
+      <p>5 min</p>
     </div>
     <div class="rec-field">
       <label>Wplyw na sprzedaz</label>
-      <p>Krytyczny — brak pomiaru konwersji</p>
+      <p>Krytyczny — brak pomiaru konwersji i ROAS w Meta Ads</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card low">
+  <div class="rec-head">
+    <h3>GTM noscript (body tag) zakomentowany w theme.liquid</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-low">Kosmetyczny</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Odkomentuj include 'naoko-gtm-tag-body' w layout/theme.liquid — to tag &lt;noscript&gt; GTM dla uzytkow bez JS. Niski priorytet ale poprawia pokrycie.</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Tech</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>5 min</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Niski — dotyczy ~1% uzytkownikow bez JavaScript</p>
+    </div>
+    
+  </div>
+</div><div class="rec-card high">
+  <div class="rec-head">
+    <h3>Meta Pixel aktywny tylko warunkowo (tylko: /pages/micra)</h3>
+    <span class="badge-warn">WARN</span>
+    <span class="badge-global">GLOBALNY</span>
+    <span class="prio-high">Wysoki</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-field full">
+      <label>Akcja</label>
+      <div class="akcja-text">Przeniesc kod fbq() z warunku if request.path do sekcji globalnej snippets/naoko-gtm-tag-head.liquid LUB skonfigurowac pixel przez Shopify Customer Events (Settings &gt; Customer Events &gt; Meta Pixel). Pixel musi sledzic wszystkie strony aby optymalizacja kampanii Meta dzialala poprawnie.</div>
+    </div>
+    <div class="rec-field">
+      <label>Dzial wlascicielski</label>
+      <p>Marketing / Tech</p>
+    </div>
+    <div class="rec-field">
+      <label>Szacowany czas naprawy</label>
+      <p>30 min</p>
+    </div>
+    <div class="rec-field">
+      <label>Wplyw na sprzedaz</label>
+      <p>Wysoki — brak ViewContent/AddToCart/Purchase = slepa optymalizacja kampanii</p>
     </div>
     
   </div>
@@ -311,7 +363,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     </div>
     
   </div>
-</div><div class="group-header">Specyficzne dla tego produktu (8)</div><div class="rec-card med">
+</div><div class="group-header">Specyficzne dla tego produktu (7)</div><div class="rec-card med">
   <div class="rec-head">
     <h3>12/12 zdj bez alt textu</h3>
     <span class="badge-err">ERROR</span>
@@ -464,32 +516,6 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="rec-field">
       <label>Wplyw na sprzedaz</label>
       <p>Wysoki — falszywa promocja naraża na kare UOKiK / Omnibus</p>
-    </div>
-    
-  </div>
-</div><div class="rec-card low">
-  <div class="rec-head">
-    <h3>Stale tagi: ['custom._socialmedia_parametr_rodzaj']</h3>
-    <span class="badge-warn">WARN</span>
-    <span class="badge-perproduct">PER PRODUKT</span>
-    <span class="prio-low">Kosmetyczny</span>
-  </div>
-  <div class="rec-body">
-    <div class="rec-field full">
-      <label>Akcja</label>
-      <div class="akcja-text">Usun stare tagi kampanijne (_socialmedia_parametr_rodzaj, _socialmedia_filtr_2) — nie sa juz uzywane</div>
-    </div>
-    <div class="rec-field">
-      <label>Dzial wlascicielski</label>
-      <p>Operations</p>
-    </div>
-    <div class="rec-field">
-      <label>Szacowany czas naprawy</label>
-      <p>2 min / produkt</p>
-    </div>
-    <div class="rec-field">
-      <label>Wplyw na sprzedaz</label>
-      <p>Niski — smieci w danych</p>
     </div>
     
   </div>

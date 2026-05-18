@@ -1,0 +1,8 @@
+# Credentials — NIGDY nie commituj
+.env
+*.env
+secrets.py
+
+# Python
+__pycache__/
+*.pyc
